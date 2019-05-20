@@ -1,0 +1,33 @@
+* {
+	box-sizing: border-box;
+	margin: 0;
+}
+
+body {
+	display: grid;
+	grid-template-areas: 
+	"nav topSection"
+	"nav bottomSection";
+	grid-template-columns: 20% 80%;
+}
+
+nav {
+	background-color: #201f3d;
+	grid-area: nav;
+	height: 100vh;
+}
+
+.input-field {
+    background-color: #a8aad2;
+	grid-area: topSection;
+}
+
+.card-field {
+	background-color: #eaeaf4;
+	grid-area: bottomSection;
+}
+
+img {
+	height: 20px;
+	width: 20px;
+}
