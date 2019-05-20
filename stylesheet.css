@@ -85,10 +85,31 @@ h3,
   color: #eaeaf4;
 }
 
+
 form {
   
 }
 
 .save-btn {
   display: block;
+}
+
+article {
+  height: 250px;
+  width: 200px;
+  background-color: white;
+  display: grid;
+}
+
+header {
+  background-color: #201f3d;
+  height: 40px;
+  display: flex;
+  justify-content: space-between;
+}
+
+footer {
+  display: flex;
+  justify-content: space-between;
+  background-color: #5356a4;
 }
