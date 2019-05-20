@@ -12,7 +12,7 @@
 		<nav>
 			<h1>IdeaBox Redux</h1>
 			<h3>Filter Starred Ideas</h3>
-			<button type="submit">Show Starred Ideas</button>
+			<button type="submit" class="nav-btn" id="show-star-btn">Show Starred Ideas</button>
 			<h3>Filter by Quality</h3>
 			<ul>
 				<li>Swill</li>
@@ -22,34 +22,34 @@
 			<form>
 				<label for="new-quality">New Quality</label>
 				<input type="text" id="new-quality"/>
-				<button type="submit">Add New Quality</button>
+				<button type="submit" class="nav-btn" id="add-quality-btn">Add New Quality</button>
 			</form>
 		</nav>
 		<section class="input-field">
 			<form>
 				<label for="title">Title</label>
-				<input type="text" id="title"/>
+				<input type="text" class="title-input" id="title"/>
 				<label for="body">Body</label>
-				<textarea type="text" id="body"></textarea>
-				<button type="submit">Save</button>
-				<button type="submit"></button>
-				<input type="search" placeholder="Search ideas"/>
+				<textarea type="text" class="body-input" id="body"></textarea>
+				<button type="submit" class="save-btn">Save</button>
+				<button type="submit" class="search-btn"></button>
+				<input type="search" placeholder="Search ideas" class="search-input"/>
 			</form>
 		</section>
 		<section class="card-field">
 			<article>
 				<header>
-					<img src="images/star.svg"/>
-					<img src="images/delete.svg"/>
+					<img src="images/star.svg" class="card-icon" id="star-btn"/>
+					<img src="images/delete.svg" class="card-icon" id="delete-btn"/>
 				</header>
 				<main>
 					<h2>Idea title</h2>
 					<p> blah blah blah blah </p>
 				</main>
 				<footer>
-					<img src="images/upvote.svg"/>
+					<img src="images/upvote.svg" class="card-icon" id="upvote-btn"/>
 					<h4>Quality:Swill</h4>
-					<img src="images/downvote.svg"/>
+					<img src="images/downvote.svg" class="card-icon" id="downvote-btn"/>
 				</footer>
 			</article>
 		</section>
