@@ -1,6 +1,7 @@
 * {
 	box-sizing: border-box;
 	margin: 0;
+	font-family: 'Open-sans', sans-serif;
 }
 
 body {
@@ -8,18 +9,51 @@ body {
 	grid-template-areas: 
 	"nav topSection"
 	"nav bottomSection";
-	grid-template-columns: 20% 80%;
+	grid-template-columns: 25% 75%;
 }
 
 nav {
 	background-color: #201f3d;
 	grid-area: nav;
 	height: 100vh;
+	color: white;
+}
+
+h1 {
+  border-bottom: 1px inset #eaeaf4;
+  font-weight: 400;
+ /* margin-left: 20px;*/
+  margin-top: 40px;
+  margin-bottom: 40px;
+}
+
+.nav-btn {
+  height: 50px;
+  width: 90%;
+  font-size: 26px;
+  background-color: #5356a4;
+  border-color: #353567;
+  color: #e9e9f3;
+  border-radius: 2px;
+  font-weight: 600;
+}
+
+li {
+  list-style-type: none;
+  font-size: 22px;
+  margin-bottom: 30px;
+}
+
+label {
+	display: block;
 }
 
 .input-field {
     background-color: #a8aad2;
 	grid-area: topSection;
+	display: flex;
+	justify-content: center;
+/*	align-items: center;*/
 }
 
 .card-field {
@@ -30,4 +64,31 @@ nav {
 img {
 	height: 20px;
 	width: 20px;
+}
+
+h3 {
+  margin-bottom: 40px;
+}
+
+.quality-heading {
+  margin-top: 40px;
+}
+
+.new-quality-input {
+  width: 90%;
+  height: 50px;
+  margin-bottom: 20px;
+}
+
+h3, 
+.quality-label{
+  color: #eaeaf4;
+}
+
+form {
+  
+}
+
+.save-btn {
+  display: block;
 }
