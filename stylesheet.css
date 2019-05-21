@@ -59,6 +59,11 @@ label {
 .card-field {
 	background-color: #eaeaf4;
 	grid-area: bottomSection;
+  display:grid;
+  grid-template-columns: 22% 22% 22% 22%;
+  grid-gap: 10px 10px;
+  grid-template-rows: repeat(2,1fr);
+  padding: 20px;
 }
 
 .card-icon {
@@ -92,6 +97,11 @@ form {
 
 .save-btn {
   display: block;
+}
+
+.disabled {
+  background-color:#eaeaf4;
+  cursor:not-allowed;
 }
 
 article {
