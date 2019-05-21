@@ -61,7 +61,7 @@ label {
 	grid-area: bottomSection;
 }
 
-img {
+.card-icon {
 	height: 20px;
 	width: 20px;
 }
