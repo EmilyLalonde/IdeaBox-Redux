@@ -8,7 +8,7 @@ var searchBtn = document.querySelector('.search-btn');
 var searchInput = document.querySelector('.search-input');
 var cardField = document.querySelector('.card-field');
 var hiddenMsg = document.querySelector('.hidden');
-var storageArray = JSON.parse(localStorage.getItem('storageArray')) ||[];
+var storageArray = JSON.parse(localStorage.getItem('ideas')) ||[];
 
 // window.addEventListener('load', createCard);
 saveBtn.addEventListener('click', saveCardInfo);
@@ -52,6 +52,16 @@ function clearInputs() {
   bodyInput.value = '';
 };
 
+function instantiateIdeas(e) {
+  e.preventDefault();
+  var ideaTitle = titleInput.value;
+  var ideaBody = bodyInput.value;
+  var ideaId = Date.now();
+  var idea = new Idea ({id: ideaId, title: ideaTitle, body: ideaBody, star: false, quality: 0});
+  storageArray.push(idea);
+  idea.saveToStorage();
+}
+
 function createCard(e) {
   e.preventDefault();
   var newCard = document.createElement('div');
@@ -74,57 +84,3 @@ function createCard(e) {
   </article>`
   };
 
-function saveCardInfo(e) {
-  e.preventDefault();
-  var savedInfo = new Idea(Date.now(), titleInput.value, bodyInput.value);
-  storageArray.push(savedInfo);
-  savedInfo.saveToStorage(storageArray);
-};
-
-// function createCard(e) {
-//   e.preventDefault();
-//   var newCard = document.createElement('div');
-//   cardField.prepend(newCard);
-//   newCard.innerHTML += 
-//   `<article class="card" data-id="${localStorage.getItem('ideaId')}">
-//   <header>
-//     <input type="image" src="images/star.svg" class="card-icon" id="star-btn"/>
-//     <input type="image" src="images/delete.svg" class="card-icon delete-btn"/>
-//   </header>
-//     <section>
-//     <h2 contenteditable = 'true'>${localStorage.getItem('ideaTitle')}</h2>
-//     <p contenteditable = 'true'>${localStorage.getItem('ideaBody')}</p>
-//   </section>
-//     <footer>
-//       <input type="image" src="images/upvote.svg" class="card-icon" id="upvote-btn"/>
-//       <h4>Quality: Swill</h4>
-//       <input type="image" src="images/downvote.svg" class="card-icon" id="downvote-btn"/>
-//     </footer>
-//   </article>`
-//   };
-
-
-
-// function saveCardInfo() {
-//     var savedInfo = new Idea(Date.now(), titleInput.value, bodyInput.value);
-//     storageArray.push(savedInfo);
-//     savedInfo.saveToStorage(storageArray);
-//     return savedInfo;
-// };
-
-// function createIdea() {
-//   var idea = saveCardInfo();
-//   createCard(idea);
-//   clearInputs();
-// }
-
-
-// var saveId = Date.now();
-  // var saveTitle = titleInput.value;
-  // var saveBody = bodyInput.value;
-  // var stringifiedSavedTitle = JSON.stringify(saveTitle);
-  // localStorage.setItem('ideaTitle', stringifiedSavedTitle);
-  // var stringifiedDavedBody = JSON.stringify(saveBody);
-  // localStorage.setItem('ideaBody', stringifiedDavedBody);
-  // var stringifiedSavedId = JSON.stringify(saveId);
-  // localStorage.setItem('ideaId', stringifiedSavedId);
