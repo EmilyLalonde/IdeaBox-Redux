@@ -34,7 +34,7 @@ h1 {
 
 .nav-btn {
   height: 50px;
-  width: 90%;
+  width: 215%;
   font-size: 26px;
   background-color: #5356a4;
   border-color: #353567;
@@ -108,10 +108,12 @@ h3 {
 }
 
 .new-quality-input {
-  width: 90%;
+  width: 215%;
   height: 50px;
   margin-bottom: 20px;
 }
+
+
 
 h3, 
 .quality-label{
