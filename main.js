@@ -72,6 +72,7 @@ function createCard(e, idea) {
   cardField.insertAdjacentHTML('afterbegin', newCard);
   };
 
+
 function saveCardInfo(e) {
   e.preventDefault();
   var savedInfo = new Idea(Date.now(), titleInput.value, bodyInput.value);
@@ -87,6 +88,8 @@ function saveCardInfo(e) {
 //     createCard(restoredIdeas);
 //   });
 // };
+
+
 
 
 
