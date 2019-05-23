@@ -7,8 +7,8 @@ class Idea {
     this.quality = ['Swill', 'Plausible', 'Genius'];
   };
   saveToStorage (){
-    var stringifiedSavedCard = JSON.stringify(this);
-    localStorage.setItem(this.id, stringifiedSavedCard);
+    var stringifiedSavedCard = JSON.stringify(storageArray);
+    localStorage.setItem('ideas', stringifiedSavedCard);
   };
   deleteFromStorage(key){
     localStorage.removeItem(key);

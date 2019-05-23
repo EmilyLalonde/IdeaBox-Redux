@@ -8,7 +8,7 @@ var searchBtn = document.querySelector('.search-btn');
 var searchInput = document.querySelector('.search-input');
 var cardField = document.querySelector('.card-field');
 var hiddenMsg = document.querySelector('.hidden');
-var storageArray = JSON.parse(localStorage.getItem('storageArray')) ||[];
+var storageArray = JSON.parse(localStorage.getItem('ideas')) ||[];
 
 // window.addEventListener('load', createCard);
 saveBtn.addEventListener('click', saveCardInfo);
@@ -52,19 +52,20 @@ function clearInputs() {
   bodyInput.value = '';
 };
 
-function createCard(e) {
+function createCard(e, idea) {
   e.preventDefault();
   var newCard = document.createElement('div');
   cardField.prepend(newCard);
   newCard.innerHTML += 
-  `<article class="card" data-id="${localStorage.getItem('ideaId')}">
+  console.log('yo',idea);
+  `<article class="card" data-id="${idea.id}">
   <header>
     <input type="image" src="images/star.svg" class="card-icon" id="star-btn"/>
     <input type="image" src="images/delete.svg" class="card-icon delete-btn"/>
   </header>
     <section>
-    <h2 contenteditable = 'true'>${localStorage.getItem('ideaTitle')}</h2>
-    <p contenteditable = 'true'>${localStorage.getItem('ideaBody')}</p>
+    <h2 contenteditable = 'true'>${idea.title}</h2>
+    <p contenteditable = 'true'>${idea.body}</p>
   </section>
     <footer>
       <input type="image" src="images/upvote.svg" class="card-icon" id="upvote-btn"/>
@@ -79,7 +80,12 @@ function saveCardInfo(e) {
   var savedInfo = new Idea(Date.now(), titleInput.value, bodyInput.value);
   storageArray.push(savedInfo);
   savedInfo.saveToStorage(storageArray);
+  createCard(e,savedInfo);
 };
+
+function createIdea() {
+  
+}
 
 // function createCard(e) {
 //   e.preventDefault();
