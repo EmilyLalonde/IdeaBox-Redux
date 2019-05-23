@@ -6,7 +6,7 @@ class Idea {
     this.star = false;
     this.quality = ['Swill', 'Plausible', 'Genius'];
   };
-  saveToStorage (){
+  saveToStorage (storageArray){
     var stringifiedSavedCard = JSON.stringify(storageArray);
     localStorage.setItem('ideas', stringifiedSavedCard);
   };

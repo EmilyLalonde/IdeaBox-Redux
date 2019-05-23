@@ -10,9 +10,8 @@ var cardField = document.querySelector('.card-field');
 var hiddenMsg = document.querySelector('.hidden');
 var storageArray = JSON.parse(localStorage.getItem('ideas')) ||[];
 
-// window.addEventListener('load', recreateIdeas );
+window.addEventListener('load', recreateIdeas );
 saveBtn.addEventListener('click', saveCardInfo);
-saveBtn.addEventListener('click', createCard);
 window.addEventListener('load', toggleMessage);
 titleInput.addEventListener('keyup', saveBtnToggle);
 cardField.addEventListener('click', deleteCard);
@@ -52,7 +51,8 @@ function clearInputs() {
   bodyInput.value = '';
 };
 
-function createCard(e, idea) {
+function createCard(idea) {
+  console.log('new card 2', idea.id);
   var newCard =
   `<article class="card" data-id="${idea.id}">
   <header>
@@ -75,19 +75,20 @@ function createCard(e, idea) {
 
 function saveCardInfo(e) {
   e.preventDefault();
+  console.log('new card')
   var savedInfo = new Idea(Date.now(), titleInput.value, bodyInput.value);
   storageArray.push(savedInfo);
   console.log('yeehaw',storageArray)
   savedInfo.saveToStorage(storageArray);
-  createCard(e, savedInfo);
+  createCard(savedInfo);
 };
 
-// function recreateIdeas() {
-//   storageArray = storageArray.map(function(oldIdea) {
-//     var restoredIdeas = new Idea(oldIdea.id, oldIdea.title, oldIdea.body);
-//     createCard(restoredIdeas);
-//   });
-// };
+function recreateIdeas() {
+  storageArray = storageArray.map(function(oldIdea) {
+    var restoredIdeas = new Idea(oldIdea.id, oldIdea.title, oldIdea.body);
+    createCard(restoredIdeas);
+  });
+};
 
 
 
