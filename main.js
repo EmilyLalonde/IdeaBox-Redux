@@ -41,13 +41,13 @@ function deleteCard(e) {
   if (e.target.className === 'card-icon delete-btn') {
     e.target.parentElement.parentElement.remove();
   }
-  deleteLocal();
+  deleteData('ideas');
 };
 
-function deleteLocal(idea) {
+function deleteData(idea) {
   // delete idea from local storage usinf localStorage.removeItem();
-  console.log(storageArray);
-  localStorage.removeItem(storageArray);
+  console.log('ideas');
+  localStorage.removeItem('ideas');
 
 }
 
