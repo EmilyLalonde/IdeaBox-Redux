@@ -49,7 +49,7 @@ label {
 }
 
 .input-field {
-    background-color: #a8aad2;
+  background-color: #a8aad2;
 	grid-area: topSection;
 	display: flex;
 	justify-content: center;
@@ -60,7 +60,7 @@ label {
 	background-color: #eaeaf4;
 	grid-area: bottomSection;
   display:grid;
-  grid-template-columns: 22% 22% 22% 22%;
+  grid-template-columns: 24% 24% 24% 24%;
   grid-gap: 10px 10px;
   grid-template-rows: repeat(2,1fr);
   padding: 20px;
