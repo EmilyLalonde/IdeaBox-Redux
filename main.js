@@ -80,6 +80,7 @@ function saveCardInfo(e) {
   console.log('yeehaw',storageArray)
   savedInfo.saveToStorage(storageArray);
   createCard(e, savedInfo);
+  clearInputs();
 };
 
 // function recreateIdeas() {
@@ -88,7 +89,7 @@ function saveCardInfo(e) {
 //     createCard(restoredIdeas);
 //   });
 // };
-
+ 
 
 
 
