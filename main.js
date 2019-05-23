@@ -42,15 +42,23 @@ function deleteCard(e) {
     e.target.parentElement.parentElement.remove();
   }
   deleteData('ideas');
+  // deleteItem(e);
 };
 
 function deleteData(idea) {
-  // delete idea from local storage usinf localStorage.removeItem();
-  console.log('ideas');
+  //delete idea from local storage using localStorage.removeItem();
+  //target the id for the card being deleted
+  //has to only delete the information from that specific card
+  // var deleteCard = storageArray.indexOf('ideas');
+  // console.log('deleteCard');
+    var id = idea.target.id;
+    console.log("delete an item: " + id);
+
   localStorage.removeItem('ideas');
 
 }
-
+// function deleteItem(e) {
+// }         
 // function saveBtnToggle() {
 //   var isDisbabled = titleInput.value === '' && bodyInput.value === ''; 
 //    document.getElementsByClassName('save-btn').disabled = isDisbabled;
