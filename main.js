@@ -91,6 +91,19 @@ function recreateIdeas() {
 };
 
 
+  createCard(e, savedInfo);
+  clearInputs();
+};
+
+// function recreateIdeas() {
+//   storageArray = storageArray.map(function(oldIdea) {
+//     var restoredIdeas = new Idea(oldIdea.id, oldIdea.title, oldIdea.body);
+//     createCard(restoredIdeas);
+//   });
+// };
+ 
+
+
 
 
 

@@ -34,7 +34,7 @@ h1 {
 
 .nav-btn {
   height: 50px;
-  width: 215%;
+  width: 90%;
   font-size: 26px;
   background-color: #5356a4;
   border-color: #353567;
@@ -150,7 +150,7 @@ form {
 
 .search-input {
   width: 88%;
-
+  height: 50px;
 }
 
 .disabled {
