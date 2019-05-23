@@ -8,8 +8,6 @@ var searchBtn = document.querySelector('.search-btn');
 var searchInput = document.querySelector('.search-input');
 var cardField = document.querySelector('.card-field');
 var hiddenMsg = document.querySelector('.hidden');
-console.log(localStorage.getItem('ideas'));
-console.log(typeof localStorage.getItem('ideas'));
 var storageArray = JSON.parse(localStorage.getItem('ideas')) || [];
 
 window.addEventListener('load', recreateIdeas );
@@ -38,42 +36,23 @@ function saveBtnToggle() {
 };
 
 function deleteCard(e) {
-  // let element = document.querySelector(`[data-id=${id}]`)
-  var card = e.target.parentElement.parentElement
-  card.remove()
-  deleteStoredCard(card.id)
-  // if (e.target.className === 'delete-btn') {
-  // }
-  // deleteStoredCard(e.target.id);
-  
-  // deleteItem(e);
+  if (e.target.className === 'card-icon delete-btn') {
+    var card = e.target.parentElement.parentElement
+    deleteStoredCard(card.id)
+    card.remove()
+  }
 };
 
 function deleteStoredCard(cardId) {
-  const newArray = storageArray.filter(card => {
-    if (card.id !== cardId) {
-      return card
-    }
+  var newArray = storageArray.filter(function(card) {
+      if (card.id != cardId) {
+        return card
+      }
   })
+  var stringifiedNewArray = JSON.stringify(newArray);
+  localStorage.setItem('ideas', stringifiedNewArray); 
+};
 
-  
-  //delete idea from local storage using localStorage.removeItem();
-  //target the id for the card being deleted
-  //has to only delete the information from that specific card
-  // var deleteCard = storageArray.indexOf('ideas');
-  // console.log('deleteCard');
-
-  //   var id = idea.target.id;
-  //   console.log("delete an item: " + id);
-
-  // localStorage.removeItem('ideas');
-}
-// function deleteItem(e) {
-// }         
-// function saveBtnToggle() {
-//   var isDisbabled = titleInput.value === '' && bodyInput.value === ''; 
-//    document.getElementsByClassName('save-btn').disabled = isDisbabled;
-// };
 
 function clearInputs() {
   titleInput.value = '';
