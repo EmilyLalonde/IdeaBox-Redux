@@ -38,24 +38,35 @@ function saveBtnToggle() {
 };
 
 function deleteCard(e) {
-  if (e.target.className === 'card-icon delete-btn') {
-    e.target.parentElement.parentElement.remove();
-  }
-  deleteData('ideas');
+  // let element = document.querySelector(`[data-id=${id}]`)
+  var card = e.target.parentElement.parentElement
+  card.remove()
+  deleteStoredCard(card.id)
+  // if (e.target.className === 'delete-btn') {
+  // }
+  // deleteStoredCard(e.target.id);
+  
   // deleteItem(e);
 };
 
-function deleteData(idea) {
+function deleteStoredCard(cardId) {
+  const newArray = storageArray.filter(card => {
+    if (card.id !== cardId) {
+      return card
+    }
+  })
+
+  
   //delete idea from local storage using localStorage.removeItem();
   //target the id for the card being deleted
   //has to only delete the information from that specific card
   // var deleteCard = storageArray.indexOf('ideas');
   // console.log('deleteCard');
-    var id = idea.target.id;
-    console.log("delete an item: " + id);
 
-  localStorage.removeItem('ideas');
+  //   var id = idea.target.id;
+  //   console.log("delete an item: " + id);
 
+  // localStorage.removeItem('ideas');
 }
 // function deleteItem(e) {
 // }         
@@ -70,13 +81,13 @@ function clearInputs() {
 };
 
 function createCard(idea) {
-  console.log('new card 2', idea.id);
+  // console.log('new card 2', idea.id);
   var newCard =
-  `<article class="card" data-id="${idea.id}">
-  <header>
-    <input type="image" src="images/star.svg" class="card-icon" id="star-btn"/>
-    <input type="image" src="images/delete.svg" class="card-icon delete-btn"/>
-  </header>
+  `<article class="card" id="${idea.id}">
+    <header>
+      <input type="image" src="images/star.svg" class="card-icon" id="star-btn"/>
+      <input type="image" src="images/delete.svg" class="card-icon delete-btn"/>
+    </header>
     <section>
     <h2 contenteditable = 'true'>${idea.title}</h2>
     <p contenteditable = 'true'>${idea.body}</p>
@@ -89,7 +100,7 @@ function createCard(idea) {
   </article>`
   cardField.insertAdjacentHTML('afterbegin', newCard);
   };
-
+ 
 
 function saveCardInfo(e) {
   e.preventDefault();
