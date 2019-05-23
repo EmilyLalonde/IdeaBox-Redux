@@ -1,13 +1,7 @@
-class Idea {
-  constructor(obj){
-    this.id = obj.id;
-    this.title = obj.title;
-    this.body = obj.body;
-    this.star = false;
-    this.quality = 0;
-  };
+
   saveToStorage (){
-    localStorage.setItem('ideas', JSON.stringify(storageArray));
+    var stringifiedSavedCard = JSON.stringify(storageArray);
+    localStorage.setItem('ideas', stringifiedSavedCard);
   };
   deleteFromStorage(key){
     localStorage.removeItem(key);

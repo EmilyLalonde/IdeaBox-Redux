@@ -88,7 +88,7 @@ label {
 	background-color: #eaeaf4;
 	grid-area: bottomSection;
   display:grid;
-  grid-template-columns: 22% 22% 22% 22%;
+  grid-template-columns: 24% 24% 24% 24%;
   grid-gap: 10px 10px;
   grid-template-rows: repeat(2,1fr);
   padding: 20px;

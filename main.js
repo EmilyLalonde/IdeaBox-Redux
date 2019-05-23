@@ -10,7 +10,7 @@ var cardField = document.querySelector('.card-field');
 var hiddenMsg = document.querySelector('.hidden');
 var storageArray = JSON.parse(localStorage.getItem('ideas')) ||[];
 
-// window.addEventListener('load', createCard);
+// window.addEventListener('load', recreateIdeas );
 saveBtn.addEventListener('click', saveCardInfo);
 saveBtn.addEventListener('click', createCard);
 window.addEventListener('load', toggleMessage);
@@ -52,29 +52,16 @@ function clearInputs() {
   bodyInput.value = '';
 };
 
-function instantiateIdeas(e) {
-  e.preventDefault();
-  var ideaTitle = titleInput.value;
-  var ideaBody = bodyInput.value;
-  var ideaId = Date.now();
-  var idea = new Idea ({id: ideaId, title: ideaTitle, body: ideaBody, star: false, quality: 0});
-  storageArray.push(idea);
-  idea.saveToStorage();
-}
-
-function createCard(e) {
-  e.preventDefault();
-  var newCard = document.createElement('div');
-  cardField.prepend(newCard);
-  newCard.innerHTML += 
-  `<article class="card" data-id="${localStorage.getItem('ideaId')}">
+function createCard(e, idea) {
+  var newCard =
+  `<article class="card" data-id="${idea.id}">
   <header>
     <input type="image" src="images/star.svg" class="card-icon" id="star-btn"/>
     <input type="image" src="images/delete.svg" class="card-icon delete-btn"/>
   </header>
     <section>
-    <h2 contenteditable = 'true'>${localStorage.getItem('ideaTitle')}</h2>
-    <p contenteditable = 'true'>${localStorage.getItem('ideaBody')}</p>
+    <h2 contenteditable = 'true'>${idea.title}</h2>
+    <p contenteditable = 'true'>${idea.body}</p>
   </section>
     <footer>
       <input type="image" src="images/upvote.svg" class="card-icon" id="upvote-btn"/>
@@ -82,5 +69,29 @@ function createCard(e) {
       <input type="image" src="images/downvote.svg" class="card-icon" id="downvote-btn"/>
     </footer>
   </article>`
+  cardField.insertAdjacentHTML('afterbegin', newCard);
   };
+
+
+function saveCardInfo(e) {
+  e.preventDefault();
+  var savedInfo = new Idea(Date.now(), titleInput.value, bodyInput.value);
+  storageArray.push(savedInfo);
+  console.log('yeehaw',storageArray)
+  savedInfo.saveToStorage(storageArray);
+  createCard(e, savedInfo);
+};
+
+// function recreateIdeas() {
+//   storageArray = storageArray.map(function(oldIdea) {
+//     var restoredIdeas = new Idea(oldIdea.id, oldIdea.title, oldIdea.body);
+//     createCard(restoredIdeas);
+//   });
+// };
+
+
+
+
+
+
 
