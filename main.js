@@ -8,7 +8,9 @@ var searchBtn = document.querySelector('.search-btn');
 var searchInput = document.querySelector('.search-input');
 var cardField = document.querySelector('.card-field');
 var hiddenMsg = document.querySelector('.hidden');
-var storageArray = JSON.parse(localStorage.getItem('ideas')) ||[];
+console.log(localStorage.getItem('ideas'));
+console.log(typeof localStorage.getItem('ideas'));
+var storageArray = JSON.parse(localStorage.getItem('ideas')) || [];
 
 window.addEventListener('load', recreateIdeas );
 saveBtn.addEventListener('click', saveCardInfo);
@@ -18,7 +20,7 @@ cardField.addEventListener('click', deleteCard);
 
 function toggleMessage(e) {
   e.preventDefault();
-  if(cardField.value === 'none') {
+  if (cardField.value === 'none') {
     hiddenMsg.style.display = 'block';
   } else {
     hiddenMsg.style.display = 'none';
@@ -26,7 +28,7 @@ function toggleMessage(e) {
 };
 
 function saveBtnToggle() {
-  if(titleInput.value === '' && bodyInput.value === '') {
+  if (titleInput.value === '' && bodyInput.value === '') {
     saveBtn.disabled = true;
     saveBtn.classList.add('disabled');
   } else {
@@ -36,10 +38,18 @@ function saveBtnToggle() {
 };
 
 function deleteCard(e) {
-  if(e.target.className === 'card-icon delete-btn') {
+  if (e.target.className === 'card-icon delete-btn') {
     e.target.parentElement.parentElement.remove();
   }
+  deleteLocal();
 };
+
+function deleteLocal(idea) {
+  // delete idea from local storage usinf localStorage.removeItem();
+  console.log(storageArray);
+  localStorage.removeItem(storageArray);
+
+}
 
 // function saveBtnToggle() {
 //   var isDisbabled = titleInput.value === '' && bodyInput.value === ''; 
@@ -75,25 +85,27 @@ function createCard(idea) {
 
 function saveCardInfo(e) {
   e.preventDefault();
-  console.log('new card')
+  console.log('new card');
+  console.log(storageArray);
   var savedInfo = new Idea(Date.now(), titleInput.value, bodyInput.value);
+  console.log(storageArray);
   storageArray.push(savedInfo);
   console.log('yeehaw',storageArray)
   savedInfo.saveToStorage(storageArray);
   createCard(savedInfo);
+  clearInputs();
 };
 
 function recreateIdeas() {
+
   storageArray = storageArray.map(function(oldIdea) {
     var restoredIdeas = new Idea(oldIdea.id, oldIdea.title, oldIdea.body);
     createCard(restoredIdeas);
+    return restoredIdeas;
   });
 };
 
 
-  createCard(e, savedInfo);
-  clearInputs();
-};
 
 // function recreateIdeas() {
 //   storageArray = storageArray.map(function(oldIdea) {
