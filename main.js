@@ -63,7 +63,7 @@ function clearInputs() {
 function createCard(idea) {
   // console.log('new card 2', idea.id);
   var newCard =
-  `<article class="card" id="${idea.id}">
+  `<article class="card" data-id="${idea.id}">
     <header>
       <input type="image" src="images/star.svg" class="card-icon star-active" id="star-btn"/>
       <input type="image" src="images/delete.svg" class="card-icon delete-btn"/>
@@ -104,17 +104,23 @@ function recreateIdeas() {
 };
 
 function toggleStar(e) {
-  if(e.target.className === 'card-icon star-active') {
-    var activeStar = e.target;
-    console.log(activeStar);
-    activeStar.src = 'images/star-active.svg';
-    //storeActiveStar();
-  } else if(e.target.id === 'star-btn'){
-    // remove that classname
-    activeStar.src = 'images/star.svg';
-    //removeStoredStar();
+  if(e.target.classList.contains('card-icon')) {
+    var star = e.target.parentElement.parentElement;
+    var starId = star.dataset.id;
+    var storeIdStar = storageArray.find(function(idea) {
+        return idea.id === parseInt(starId);
+    });
+    storeIdStar.star = !storeIdStar.star
+    var notherStar = e.target;
+    if(storeIdStar.star === true) {
+       notherStar.src = 'images/star-active.svg';
+    } else {
+    notherStar.src = 'images/star.svg';
+   }
   }
 };
+
+
 
 
 
