@@ -132,7 +132,3 @@ function toggleStar(e) {
 
 
 
-
-
-
-

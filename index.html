@@ -11,20 +11,26 @@
 	</head>
 	<body>
 		<nav>
-			<h1>IdeaBox Redux</h1>
+			
+			<div class="overlay">
+					<h1>IdeaBox Redux</h1>
+				<label for="toggle"></label>
+			</div>
+		<input type="checkbox" id="toggle" name="toggle">
+		<div class="verticalNav">
 			<h3>Filter Starred Ideas</h3>
 			<button type="submit" class="nav-btn" id="show-star-btn">Show Starred Ideas</button>
 			<h3 class="quality-heading">Filter by Quality</h3>
-			<ul>
-				<li>Swill</li>
-				<li>Plausible</li>
-				<li>Genius</li>
-			</ul>
+				<a href="/">Swill</a>
+				<a href="/">Plausible</a>
+				<a href="/">Genius</a>
 			<form>
 				<label for="new-quality" class="quality-label">New Quality</label>
 				<input type="text" class= "new-quality-input" id="new-quality"/>
 				<button type="submit" class="nav-btn" id="add-quality-btn">Add New Quality</button>
 			</form>
+		</div>
+		
 		</nav>
 		<section class="input-field">
 			<form>
@@ -33,8 +39,10 @@
 				<label for="body">Body</label>
 				<textarea type="text" class="body-input" id="body"></textarea>
 				<button type="submit" class="save-btn" disabled>Save</button>
+				<div>
 				<input type="image" src="images/search.svg" class="search-btn">
 				<input type="text" placeholder="Search ideas" class="search-input"/>
+				</div>
 			</form>
 		</section>
 		<section class="card-field">
