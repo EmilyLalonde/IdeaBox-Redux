@@ -1,0 +1,15 @@
+* {
+  box-sizing: border-box;
+}
+
+nav {
+  background-color: #201f3d;
+}
+
+.input-field {
+  background-color: #a8aad2;
+}
+
+.card-field {
+  background-color: #eaeaf4;
+}

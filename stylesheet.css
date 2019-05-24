@@ -1,4 +1,4 @@
-* {
+/* * {
 	box-sizing: border-box;
 	margin: 0;
 	font-family: 'Open-sans', sans-serif;
@@ -28,11 +28,11 @@ h1 {
   border-bottom: 1px inset #eaeaf4;
   font-weight: 400;
  /* margin-left: 20px;*/
-  margin-top: 40px;
+  /* margin-top: 40px;
   margin-bottom: 40px;
-}
+} */
 
-.nav-btn {
+/* .nav-btn {
   height: 50px;
   width: 90%;
   font-size: 26px;
@@ -41,21 +41,21 @@ h1 {
   color: #e9e9f3;
   border-radius: 2px;
   font-weight: 600;
-}
+} */
 
-ul {
+/* ul {
   padding-inline-start: 0;
-  /*margin-left:20px;*/
-}
+  margin-left:20px;
+} */
 
-li {
+/* li {
   list-style-type: none;
   font-size: 28px;
- /* margin-bottom: 30px;*/
+ margin-bottom: 30px;
   height: 55px;
   border-left-width: 10px;
-}
-
+} */
+/* 
 label {
 	display: block;
   margin: 25px 0 5px;
@@ -82,9 +82,9 @@ label {
   border-radius: 3px;
   border-color: #353567;
   font-size: 20px;
-}
+} */
 
-.card-field {
+/* .card-field {
 	background-color: #eaeaf4;
 	grid-area: bottomSection;
   display:grid;
@@ -111,8 +111,8 @@ h3 {
   width: 215%;
   height: 50px;
   margin-bottom: 20px;
-}
-
+} */
+/* 
 
 
 h3, 
@@ -176,4 +176,4 @@ footer {
   display: flex;
   justify-content: space-between;
   background-color: #5356a4;
-}
+}  */
