@@ -15,6 +15,7 @@ saveBtn.addEventListener('click', saveCardInfo);
 window.addEventListener('load', toggleMessage);
 titleInput.addEventListener('keyup', saveBtnToggle);
 cardField.addEventListener('click', deleteCard);
+cardField.addEventListener('click', toggleStar);
 
 function toggleMessage(e) {
   e.preventDefault();
@@ -37,18 +38,18 @@ function saveBtnToggle() {
 
 function deleteCard(e) {
   if (e.target.className === 'card-icon delete-btn') {
-    var card = e.target.parentElement.parentElement
-    deleteStoredCard(card.id)
-    card.remove()
+    var card = e.target.parentElement.parentElement;
+    deleteStoredCard(card.id);
+    card.remove();
   }
 };
 
 function deleteStoredCard(cardId) {
   var newArray = storageArray.filter(function(card) {
       if (card.id != cardId) {
-        return card
+        return card;
       }
-  })
+  });
   var stringifiedNewArray = JSON.stringify(newArray);
   localStorage.setItem('ideas', stringifiedNewArray); 
 };
@@ -64,7 +65,7 @@ function createCard(idea) {
   var newCard =
   `<article class="card" id="${idea.id}">
     <header>
-      <input type="image" src="images/star.svg" class="card-icon" id="star-btn"/>
+      <input type="image" src="images/star.svg" class="card-icon star-active" id="star-btn"/>
       <input type="image" src="images/delete.svg" class="card-icon delete-btn"/>
     </header>
     <section>
@@ -95,13 +96,29 @@ function saveCardInfo(e) {
 };
 
 function recreateIdeas() {
-
   storageArray = storageArray.map(function(oldIdea) {
     var restoredIdeas = new Idea(oldIdea.id, oldIdea.title, oldIdea.body);
     createCard(restoredIdeas);
     return restoredIdeas;
   });
 };
+
+function toggleStar(e) {
+  if(e.target.className === 'card-icon star-active') {
+    var activeStar = e.target;
+    console.log(activeStar);
+    activeStar.src = 'images/star-active.svg';
+    //storeActiveStar();
+  } else if(e.target.id === 'star-btn'){
+    // remove that classname
+    activeStar.src = 'images/star.svg';
+    //removeStoredStar();
+  }
+};
+
+
+
+
 
 
 
