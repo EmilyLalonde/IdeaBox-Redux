@@ -1,5 +1,6 @@
 * {
   box-sizing: border-box;
+  font-family: 'Open-sans', sans-serif;
   margin: 0;
 }
 
@@ -11,7 +12,9 @@ nav {
 h1 {
   background-color: #201f3d;
   color: white;
-  text-align: center;
+  margin-top: 20px;
+  float: right;
+  margin-right: 35%;
 }
 
 .overlay {
@@ -28,9 +31,11 @@ h1 {
   position: relative;
   left: 20px;
   width: 30px;
-  height: 16px;
+  height: 20px;
   border-top: 2px solid white;
   border-bottom: 2px solid white;
+  float: left;
+  margin-top: 20px;
 }
 
 .overlay > label::before {
@@ -118,14 +123,75 @@ h3 {
   z-index: 2;
 }
 
+.input-form {
+  margin-left: 5%;
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
 .title-label,
 .body-label {
   display: block;
+  margin-bottom: 10px; 
+}
+
+.body-label {
+  margin-top: 20px;
+}
+
+.title-input,
+.body-input {
+  border: 1px solid #5356a4;
+  border-radius: 2px;
+  width: 95%
+}
+
+.title-input {
+  height: 40px;
+}
+
+.body-input {
+  height: 80px;
+}
+
+.save-btn {
+  background-color: #201f3d;
+  border: 1px solid #5356a4;
+  border-radius: 2px;
+  color: white;
+  display: block;
+  font-size: 22px;
+  height: 40px;
+  margin-top: 20px;
+  width: 95%;
 }
 
 .search-btn {
   height: 15px;
+  padding: 7px;
   width: 15px;
+}
+
+.search-div {
+  border: 1px solid #5356a4;
+  border-radius: 2px;
+  height: 40px;
+  margin-bottom: 20px;
+  margin-top: 20px;
+  width: 95%;
+}
+
+.search-btn {
+  background-color: #201f3d;
+  height: 38px;
+  margin-right: -3px;
+  width: 5%;
+}
+
+.search-input {
+  float: right;
+  height: 38px;
+  width: 95%;
 }
 
 .card-field {
