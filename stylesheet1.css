@@ -5,7 +5,7 @@
 
 nav {
   background-color: #201f3d;
-  height: 50px;
+  height: 60px;
 }
 
 h1 {
@@ -44,24 +44,25 @@ h1 {
 .verticalNav {
   background-color: #201f3d;
   position: relative;
-  top: -300px;
-  height: 350px;
-  padding: 20px;
-  padding-left: 130px;
+  top: -350px;
+  height: 400px;
+  padding-top: 20px;
   font-size: 22px;
   box-sizing: border-box;
   transition: top 600ms cubic-bezier(0.17, 0.04, 0.03, 0.94);
+  width: 100%;
 }
 
 .verticalNav a {
   display: block;
-  color: #111;
+  color: white;
+  margin-left: 5%;
   text-decoration: none;
 }
 
 .verticalNav a:hover {
-  width: 120px;
-  background-color: #fff;
+  width: 100%;
+  background-color: #d14119;
 }
 
 #toggle {
@@ -70,16 +71,56 @@ h1 {
 }
 
 #toggle:checked ~ .verticalNav {
-  top: 80px;
+  top: 40px;
 }
 
-#toggle:checked  ~ .puppies {
+#toggle:checked {
   margin-top: 135px;
+}
+
+h3 {
+  color: white;
+  font-size: 20px;
+  font-weight: 100;
+  margin-bottom: 20px;
+  margin-left: 5%;
+  margin-top: 20px;
+}
+
+.nav-btn {
+  background-color: #5356a4;
+  border: none;
+  border-radius: 2px;
+  color: #eaeaf4;
+  font-size: 20px;
+  height: 40px;
+  margin-left: 5%;
+  width: 90%;
+}
+
+.quality-label {
+  color: white;
+  display: block;
+  font-size: 16px;
+  margin-left: 5%;
+  margin-top: 10px;
+}
+
+.new-quality-input {
+  height: 40px;
+  margin-bottom: 20px;
+  margin-left: 5%;
+  width: 90%;
 }
 
 .input-field {
   background-color: #a8aad2;
   z-index: 2;
+}
+
+.title-label,
+.body-label {
+  display: block;
 }
 
 .search-btn {
