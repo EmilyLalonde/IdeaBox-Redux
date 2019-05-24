@@ -185,13 +185,13 @@ h3 {
   background-color: #201f3d;
   height: 38px;
   margin-right: -3px;
-  width: 5%;
+  width: 8%;
 }
 
 .search-input {
   float: right;
   height: 38px;
-  width: 95%;
+  width: 92%;
 }
 
 .card-field {
@@ -234,5 +234,43 @@ footer {
   display: flex;
   justify-content: space-between;
   background-color: #5356a4;
-  /* height: 20px;
+}
+
+@media screen and (min-width: 720px) {
+
+  body {
+    display: grid;
+    grid-template-areas: 
+    "nav topSection"
+    "nav bottomSection";
+    grid-template-columns: 25% 75%;
+  }
+
+  nav {
+    grid-area: nav;
+    height: 100%;
+  }
+
+  h1 {
+    float: none;
+  }
+
+  .overlay > label{
+    display: none;
+  }
+
+  .verticalNav {
+    top: 30px;
+  }
+
+  .input-field {
+    grid-area: topSection;
+  }
+
+  .card-field {
+    grid-area: bottomSection;
+  }
+  
+
+  
 }
