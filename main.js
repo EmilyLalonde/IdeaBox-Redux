@@ -16,6 +16,7 @@ window.addEventListener('load', toggleMessage);
 titleInput.addEventListener('keyup', saveBtnToggle);
 cardField.addEventListener('click', deleteCard);
 cardField.addEventListener('click', toggleStar);
+cardField.addEventListener('focusout', storeEditedBody);
 
 function toggleMessage(e) {
   e.preventDefault();
@@ -68,9 +69,9 @@ function createCard(idea) {
       <input type="image" src="images/star.svg" class="card-icon star-active" id="star-btn"/>
       <input type="image" src="images/delete.svg" class="card-icon delete-btn"/>
     </header>
-    <section>
-    <h2 contenteditable = 'true'>${idea.title}</h2>
-    <p contenteditable = 'true'>${idea.body}</p>
+    <section class="body-title">
+    <h2 data-title="${idea.title}" contenteditable = 'true'>${idea.title}</h2>
+    <p data-body="${idea.body}" contenteditable = 'true'>${idea.body}</p>
   </section>
     <footer>
       <input type="image" src="images/upvote.svg" class="card-icon" id="upvote-btn"/>
@@ -107,6 +108,7 @@ function toggleStar(e) {
   if(e.target.classList.contains('card-icon')) {
     var star = e.target.parentElement.parentElement;
     var starId = star.dataset.id;
+    console.log(starId);
     var storeIdStar = storageArray.find(function(idea) {
         return idea.id === parseInt(starId);
     });
@@ -120,7 +122,29 @@ function toggleStar(e) {
   }
 };
 
+// target body and title to store it in local storage 
+// when page refreshes edited title and body will still be there
 
+function storeEditedBody(e) {
+    var cardShown = e.target.parentElement.parentElement;
+    console.log(cardShown);
+
+    var bodyArray = [];
+    var titleArray = [];
+
+    var bodyValue = bodyArray.value;
+    var titleValue = titleInput.value; 
+
+    bodyValue.push(bodyArray);
+    titleValue.push(titleArray);
+
+    console.log(bodyArray);
+
+    var stringiFiedBodyArray = JSON.stringify(bodyArray);
+    localStorage.setItem('body', stringiFiedBodyArray);
+    var stringiFiedTitleArray = JSON.stringify(titleArray);
+    localStorage.setItem('title', stringiFiedTitleArray);
+};
 
 
 
