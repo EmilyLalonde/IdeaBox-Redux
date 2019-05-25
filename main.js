@@ -16,6 +16,7 @@ window.addEventListener('load', toggleMessage);
 titleInput.addEventListener('keyup', saveBtnToggle);
 cardField.addEventListener('click', deleteCard);
 cardField.addEventListener('click', toggleStar);
+cardField.addEventListener('focusout', storeEditedBody);
 
 function toggleMessage(e) {
   e.preventDefault();
@@ -63,14 +64,14 @@ function clearInputs() {
 function createCard(idea) {
   // console.log('new card 2', idea.id);
   var newCard =
-  `<article class="card" id="${idea.id}">
+  `<article class="card" data-id="${idea.id}">
     <header>
       <input type="image" src="images/star.svg" class="card-icon star-active" id="star-btn"/>
       <input type="image" src="images/delete.svg" class="card-icon delete-btn"/>
     </header>
-    <section>
-    <h2 contenteditable = 'true'>${idea.title}</h2>
-    <p contenteditable = 'true'>${idea.body}</p>
+    <section class="body-title">
+    <h2 data-title="${idea.title}" contenteditable = 'true'>${idea.title}</h2>
+    <p data-body="${idea.body}" contenteditable = 'true'>${idea.body}</p>
   </section>
     <footer>
       <input type="image" src="images/upvote.svg" class="card-icon" id="upvote-btn"/>
@@ -104,16 +105,45 @@ function recreateIdeas() {
 };
 
 function toggleStar(e) {
-  if(e.target.className === 'card-icon star-active') {
-    var activeStar = e.target;
-    console.log(activeStar);
-    activeStar.src = 'images/star-active.svg';
-    //storeActiveStar();
-  } else if(e.target.id === 'star-btn'){
-    // remove that classname
-    activeStar.src = 'images/star.svg';
-    //removeStoredStar();
+  if(e.target.classList.contains('card-icon')) {
+    var star = e.target.parentElement.parentElement;
+    var starId = star.dataset.id;
+    console.log(starId);
+    var storeIdStar = storageArray.find(function(idea) {
+        return idea.id === parseInt(starId);
+    });
+    storeIdStar.star = !storeIdStar.star
+    var notherStar = e.target;
+    if(storeIdStar.star === true) {
+       notherStar.src = 'images/star-active.svg';
+    } else {
+    notherStar.src = 'images/star.svg';
+   }
   }
+};
+
+// target body and title to store it in local storage 
+// when page refreshes edited title and body will still be there
+
+function storeEditedBody(e) {
+    var cardShown = e.target.parentElement.parentElement;
+    console.log(cardShown);
+
+    var bodyArray = [];
+    var titleArray = [];
+
+    var bodyValue = bodyArray.value;
+    var titleValue = titleInput.value; 
+
+    bodyValue.push(bodyArray);
+    titleValue.push(titleArray);
+
+    console.log(bodyArray);
+
+    var stringiFiedBodyArray = JSON.stringify(bodyArray);
+    localStorage.setItem('body', stringiFiedBodyArray);
+    var stringiFiedTitleArray = JSON.stringify(titleArray);
+    localStorage.setItem('title', stringiFiedTitleArray);
 };
 
 
