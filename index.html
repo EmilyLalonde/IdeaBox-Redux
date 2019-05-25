@@ -5,39 +5,49 @@
  	<meta charset="utf-8">
  	<meta name="viewport" content="width=device-width, initial-scale=1">
  	<link rel="normalize" type="text/css" href="normalize.css">
- 	<link rel="stylesheet" type="text/css" href="stylesheet.css">
+	 <link rel="stylesheet" type="text/css" href="stylesheet1.css">
  	<link href="https://fonts.googleapis.com/css?family=Open+Sans:100,400,500,600,800" rel="stylesheet">
 	</head>
 	<body>
 		<nav>
-			<h1>IdeaBox Redux</h1>
+			<div class="overlay">
+					<h1>IdeaBox Redux</h1>
+					<div class="line1"></div>
+				<label for="toggle"></label>
+			</div>
+		<input type="checkbox" id="toggle" name="toggle">
+		<div class="verticalNav">
 			<h3>Filter Starred Ideas</h3>
 			<button type="submit" class="nav-btn" id="show-star-btn">Show Starred Ideas</button>
+			<div class="line2"></div>
 			<h3 class="quality-heading">Filter by Quality</h3>
-			<ul>
-				<li>Swill</li>
-				<li>Plausible</li>
-				<li>Genius</li>
-			</ul>
+				<a href="/">Swill</a>
+				<a href="/">Plausible</a>
+				<a href="/">Genius</a>
 			<form>
 				<label for="new-quality" class="quality-label">New Quality</label>
 				<input type="text" class= "new-quality-input" id="new-quality"/>
 				<button type="submit" class="nav-btn" id="add-quality-btn">Add New Quality</button>
+				<div class="line3"></div>
 			</form>
+		</div>
+		
 		</nav>
 		<section class="input-field">
-			<form>
-				<label for="title">Title</label>
+			<form class="input-form">
+				<label for="title" class="title-label">Title</label>
 				<input type="text" class="title-input" id="title"/>
-				<label for="body">Body</label>
+				<label for="body" class="body-label">Body</label>
 				<textarea type="text" class="body-input" id="body"></textarea>
 				<button type="submit" class="save-btn" disabled>Save</button>
+				<div class="search-div">
 				<input type="image" src="images/search.svg" class="search-btn">
 				<input type="text" placeholder="Search ideas" class="search-input"/>
+				</div>
 			</form>
 		</section>
 		<section class="card-field">
-				<!-- <article class="card">
+				<article class="card">
 						<header>
 							<input type="image" src="images/star.svg" class="card-icon" id="star-btn"/>
 							<input type="image" src="images/delete.svg" class="card-icon" id="delete-btn"/>
@@ -51,7 +61,7 @@
 								<h4>Quality:Swill</h4>
 								<input type="image" src="images/downvote.svg" class="card-icon" id="downvote-btn"/>
 							</footer>
-					</article> -->
+					</article>
 					<p class="hidden">Please Enter Idea Information!!</p>
 		</section>
 		<script src="idea.js"></script>
