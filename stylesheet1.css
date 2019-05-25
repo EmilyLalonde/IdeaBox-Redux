@@ -246,6 +246,10 @@ footer {
   background-color: #5356a4;
 }
 
+h4 {
+  color:#eaeaf4
+}
+
 @media screen and (min-width: 770px) {
 
   body {
