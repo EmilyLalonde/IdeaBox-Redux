@@ -17,7 +17,7 @@ titleInput.addEventListener('keyup', saveBtnToggle);
 cardField.addEventListener('click', deleteCard);
 cardField.addEventListener('click', toggleStar);
 cardField.addEventListener('focusout', storeEditedBody);
-
+searchInput.addEventListener('keyup', filterSearchTerms);
 function toggleMessage(e) {
   e.preventDefault();
   if (cardField.value === 'none') {
@@ -145,6 +145,20 @@ function storeEditedBody(e) {
     var stringiFiedTitleArray = JSON.stringify(titleArray);
     localStorage.setItem('title', stringiFiedTitleArray);
 };
+
+function filterSearchTerms (e) {
+    var searchText = e.target.value.toLowerCase();
+    var results = storageArray.filter(function(idea){
+      return idea.title.toLowerCase().includes(searchText);
+    })
+    document.querySelector(".card-field").innerHTML = '';
+    results.forEach(function(idea){
+      createCard(idea)
+    })
+
+
+
+}
 
 
 
