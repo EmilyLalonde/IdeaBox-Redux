@@ -49,8 +49,8 @@ h1 {
 .verticalNav {
   background-color: #201f3d;
   position: relative;
-  top: -350px;
-  height: 400px;
+  top: -450px;
+  height: 500px;
   padding-top: 20px;
   font-size: 22px;
   box-sizing: border-box;
@@ -61,7 +61,9 @@ h1 {
 .verticalNav a {
   display: block;
   color: white;
+  font-weight: 100;
   margin-left: 5%;
+  margin-top: 20px;
   text-decoration: none;
 }
 
@@ -84,9 +86,9 @@ h1 {
 }
 
 h3 {
-  color: white;
+  color: #eaeaf4;
   font-size: 20px;
-  font-weight: 100;
+  font-weight: 500;
   margin-bottom: 20px;
   margin-left: 5%;
   margin-top: 20px;
@@ -103,12 +105,18 @@ h3 {
   width: 90%;
 }
 
+.line2 {
+  border: 1px inset #5356a4;
+  margin-top: 20px;
+}
+
 .quality-label {
   color: white;
   display: block;
   font-size: 16px;
+  margin-bottom: 5px;
   margin-left: 5%;
-  margin-top: 10px;
+  margin-top: 20px;
 }
 
 .new-quality-input {
@@ -131,7 +139,9 @@ h3 {
 
 .title-label,
 .body-label {
+  color: #201f3d;
   display: block;
+  font-weight: 600;
   margin-bottom: 10px; 
 }
 
@@ -236,7 +246,7 @@ footer {
   background-color: #5356a4;
 }
 
-@media screen and (min-width: 720px) {
+@media screen and (min-width: 770px) {
 
   body {
     display: grid;
@@ -253,6 +263,7 @@ footer {
 
   h1 {
     float: none;
+    margin-bottom: 20px;
   }
 
   .overlay > label{
@@ -263,14 +274,49 @@ footer {
     top: 30px;
   }
 
+  .line1,
+  .line3 {
+    border: 1px inset #5356a4;
+    margin-top: 10px;
+  }
+
+  .line3 {
+    margin-top: 30px;
+  }
+
+  h3 {
+    margin-top: 40px;
+  }
+
+  .quality-label {
+    margin-top: 40px;
+  }
+
+  #show-star-btn{
+    margin-bottom: 30px;
+  }
+
   .input-field {
+    display: flex;
+    justify-content: center;
     grid-area: topSection;
   }
 
-  .card-field {
-    grid-area: bottomSection;
+  .input-form {
+    margin: 0;
+    width: 50%;
   }
-  
 
-  
-}
+  .body-input {
+    height: 100px;
+  }
+
+  .card-field {
+	grid-area: bottomSection;
+  display:grid;
+  grid-template-columns: 24% 24% 24% 24%;
+  grid-gap: 10px 10px;
+  grid-template-rows: repeat(3,1fr);
+  padding: 20px;
+  }
+} 
