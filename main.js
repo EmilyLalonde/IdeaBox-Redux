@@ -85,12 +85,8 @@ function createCard(idea) {
 
 function saveCardInfo(e) {
   e.preventDefault();
-  console.log('new card');
-  console.log(storageArray);
   var savedInfo = new Idea(Date.now(), titleInput.value, bodyInput.value);
-  console.log(storageArray);
   storageArray.push(savedInfo);
-  console.log('yeehaw',storageArray)
   savedInfo.saveToStorage(storageArray);
   createCard(savedInfo);
   clearInputs();
@@ -128,22 +124,18 @@ function toggleStar(e) {
 function storeEditedBody(e) {
     var cardShown = e.target.parentElement.parentElement;
     console.log(cardShown);
+    
+    var body = cardShown.dataset.id;
+    var title = cardShown.dataset.id;
 
-    var bodyArray = [];
-    var titleArray = [];
 
-    var bodyValue = bodyArray.value;
-    var titleValue = titleInput.value; 
+    // var bodyArray = [];
+    // var titleArray = [];
 
-    bodyValue.push(bodyArray);
-    titleValue.push(titleArray);
+    // var bodyValue = bodyArray.value;
+    // var titleValue = titleInput.value; 
 
-    console.log(bodyArray);
-
-    var stringiFiedBodyArray = JSON.stringify(bodyArray);
-    localStorage.setItem('body', stringiFiedBodyArray);
-    var stringiFiedTitleArray = JSON.stringify(titleArray);
-    localStorage.setItem('title', stringiFiedTitleArray);
+    
 };
 
 
