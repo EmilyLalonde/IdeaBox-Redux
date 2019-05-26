@@ -16,7 +16,9 @@ window.addEventListener('load', toggleMessage);
 titleInput.addEventListener('keyup', saveBtnToggle);
 cardField.addEventListener('click', deleteCard);
 cardField.addEventListener('click', toggleStar);
+searchInput.addEventListener('keyup', filterSearchTerms);
 cardField.addEventListener('focusout', getBodyId);
+
 
 function toggleMessage(e) {
   e.preventDefault();
@@ -140,6 +142,20 @@ function getBodyId(e) {
     idea.updateIdea(title,body,storageArray)
 
 };
+
+function filterSearchTerms (e) {
+    var searchText = e.target.value.toLowerCase();
+    var results = storageArray.filter(function(idea){
+      return idea.title.toLowerCase().includes(searchText);
+    })
+    document.querySelector(".card-field").innerHTML = '';
+    results.forEach(function(idea){
+      createCard(idea)
+    })
+
+
+
+}
 
 
 
