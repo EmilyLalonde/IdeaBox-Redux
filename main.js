@@ -16,8 +16,10 @@ window.addEventListener('load', toggleMessage);
 titleInput.addEventListener('keyup', saveBtnToggle);
 cardField.addEventListener('click', deleteCard);
 cardField.addEventListener('click', toggleStar);
-cardField.addEventListener('focusout', storeEditedBody);
 searchInput.addEventListener('keyup', filterSearchTerms);
+cardField.addEventListener('focusout', getBodyId);
+
+
 function toggleMessage(e) {
   e.preventDefault();
   if (cardField.value === 'none') {
@@ -70,8 +72,8 @@ function createCard(idea) {
       <input type="image" src="images/delete.svg" class="card-icon delete-btn"/>
     </header>
     <section class="body-title">
-    <h2 data-title="${idea.title}" contenteditable = 'true'>${idea.title}</h2>
-    <p data-body="${idea.body}" contenteditable = 'true'>${idea.body}</p>
+    <h2 class ="titleIn" data-id="${idea.title}" contenteditable = 'true'>${idea.title}</h2>
+    <p class ="bodyIn" data-id="${idea.body}" contenteditable = 'true'>${idea.body}</p>
   </section>
     <footer>
       <input type="image" src="images/upvote.svg" class="card-icon" id="upvote-btn"/>
@@ -105,14 +107,14 @@ function recreateIdeas() {
 };
 
 function toggleStar(e) {
-  if(e.target.classList.contains('card-icon')) {
+  if(e.target.classList.contains('star-active')) {
     var star = e.target.parentElement.parentElement;
     var starId = star.dataset.id;
     console.log(starId);
     var storeIdStar = storageArray.find(function(idea) {
         return idea.id === parseInt(starId);
     });
-    storeIdStar.star = !storeIdStar.star
+    storeIdStar.star = !storeIdStar.star;
     var notherStar = e.target;
     if(storeIdStar.star === true) {
        notherStar.src = 'images/star-active.svg';
@@ -125,25 +127,20 @@ function toggleStar(e) {
 // target body and title to store it in local storage 
 // when page refreshes edited title and body will still be there
 
-function storeEditedBody(e) {
-    var cardShown = e.target.parentElement.parentElement;
-    console.log(cardShown);
+function getBodyId(e) {
+    var ideaId = e.target.closest('.card').dataset.id;
+    ideaId = parseInt(ideaId);
 
-    var bodyArray = [];
-    var titleArray = [];
+    var title = document.querySelector(`.card[data-id="${ideaId}"] .titleIn`).innerText
+    var body = document.querySelector(`.card[data-id="${ideaId}"] .bodyIn`).innerText;
+    
 
-    var bodyValue = bodyArray.value;
-    var titleValue = titleInput.value; 
+    var idea = storageArray.find(function(idea) {
+        return idea.id === ideaId;
+    });
 
-    bodyValue.push(bodyArray);
-    titleValue.push(titleArray);
+    idea.updateIdea(title,body,storageArray)
 
-    console.log(bodyArray);
-
-    var stringiFiedBodyArray = JSON.stringify(bodyArray);
-    localStorage.setItem('body', stringiFiedBodyArray);
-    var stringiFiedTitleArray = JSON.stringify(titleArray);
-    localStorage.setItem('title', stringiFiedTitleArray);
 };
 
 function filterSearchTerms (e) {
@@ -159,9 +156,6 @@ function filterSearchTerms (e) {
 
 
 }
-
-
-
 
 
 
