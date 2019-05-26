@@ -40,22 +40,24 @@ function saveBtnToggle() {
 };
 
 function deleteCard(e) {
+
   if (e.target.className === 'card-icon delete-btn') {
     var card = e.target.parentElement.parentElement;
-    deleteStoredCard(card.id);
     card.remove();
   }
+
+  var deleteId = e.target.closest('.card').dataset.id;
+  deleteId = parseInt(deleteId);
+
+  var returnDeleteId = storageArray.find(function(deleteBt) {
+    return deleteBt.id === deleteId;
+  });
+
+  // console.log(returnDeleteId);
+
+  returnDeleteId.deleteFromStorage();
 };
 
-function deleteStoredCard(cardId) {
-  var newArray = storageArray.filter(function(card) {
-      if (card.id != cardId) {
-        return card;
-      }
-  });
-  var stringifiedNewArray = JSON.stringify(newArray);
-  localStorage.setItem('ideas', stringifiedNewArray); 
-};
 
 
 function clearInputs() {
@@ -64,7 +66,6 @@ function clearInputs() {
 };
 
 function createCard(idea) {
-  // console.log('new card 2', idea.id);
   var newCard =
   `<article class="card" data-id="${idea.id}">
     <header>
@@ -128,17 +129,23 @@ function toggleStar(e) {
 // when page refreshes edited title and body will still be there
 
 function getBodyId(e) {
+   // the variable ideaId targets the database-id in the class of card
     var ideaId = e.target.closest('.card').dataset.id;
+  // Changes the string into a number
     ideaId = parseInt(ideaId);
-
-    var title = document.querySelector(`.card[data-id="${ideaId}"] .titleIn`).innerText
+ 
+  // We are querying in the card class the data-id of titleIn and bodyIn 
+  // and trying to get the inner text to save it into storage
+    var title = document.querySelector(`.card[data-id="${ideaId}"] .titleIn`).innerText;
     var body = document.querySelector(`.card[data-id="${ideaId}"] .bodyIn`).innerText;
     
-
+  // shuffles through the storageArray ideas to find the id that is equal
+  // to the from the title || body
     var idea = storageArray.find(function(idea) {
         return idea.id === ideaId;
     });
-
+  // Saves title, body in the Idea class and setsItem into local storage
+  // Saves the Id of body and title into storage
     idea.updateIdea(title,body,storageArray)
 
 };
@@ -150,11 +157,8 @@ function filterSearchTerms (e) {
     })
     document.querySelector(".card-field").innerHTML = '';
     results.forEach(function(idea){
-      createCard(idea)
+      createCard(idea);
     })
-
-
-
 }
 
 
