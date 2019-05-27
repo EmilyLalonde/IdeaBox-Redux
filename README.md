@@ -15,7 +15,10 @@ This is the first group project in Mod 1.
 ![image](https://user-images.githubusercontent.com/47184994/58433393-5dd03a80-8074-11e9-8a56-2b41dbd0da4d.png)
 
 ### Our Desktop Comp with Cards:
-
+![image](https://user-images.githubusercontent.com/47184994/58433469-b30c4c00-8074-11e9-822e-5209fc5a532c.png)
 
 ### Mobile Comp:
 ![image](https://user-images.githubusercontent.com/47184994/58114560-36312c00-7bb5-11e9-8018-441d95ee0a48.png)
+
+### Our Mobile Comp not Extended:
+
