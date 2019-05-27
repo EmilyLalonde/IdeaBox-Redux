@@ -20,12 +20,11 @@ searchInput.addEventListener('keyup', filterSearchTerms);
 cardField.addEventListener('focusout', getBodyId);
 
 
-function toggleMessage(e) {
-  e.preventDefault();
-  if (cardField.value === 'none') {
-    hiddenMsg.style.display = 'block';
-  } else {
-    hiddenMsg.style.display = 'none';
+function toggleMessage () {
+  if(storageArray.length === 0) {
+  hiddenMsg.innerText = 'Please enter your idea above';
+} else {
+  hiddenMsg.innerText = '';
   }
 };
 
@@ -85,7 +84,6 @@ function clearInputs() {
 };
 
 function createCard(idea) {
-  // console.log('new card 2', idea.id);
   var newCard =
   `<article class="card" data-id="${idea.id}">
     <header>
@@ -117,6 +115,7 @@ function saveCardInfo(e) {
   savedInfo.saveToStorage(storageArray);
   createCard(savedInfo);
   clearInputs();
+  toggleMessage();
 };
 
 function recreateIdeas() {
@@ -153,6 +152,7 @@ function getBodyId(e) {
     var ideaId = e.target.closest('.card').dataset.id;
   // Changes the string into a number
     ideaId = parseInt(ideaId);
+
  
   // We are querying in the card class the data-id of titleIn and bodyIn 
   // and trying to get the inner text to save it into storage
@@ -166,8 +166,8 @@ function getBodyId(e) {
     });
   // Saves title, body in the Idea class and setsItem into local storage
   // Saves the Id of body and title into storage
-    idea.updateIdea(title,body,storageArray)
 
+    idea.updateIdea(title,body,storageArray)
 };
 
 function filterSearchTerms (e) {
@@ -179,6 +179,7 @@ function filterSearchTerms (e) {
     results.forEach(function(idea){
       createCard(idea);
     })
+
 }
 
 
@@ -190,6 +191,7 @@ function filterSearchTerms (e) {
 //     createCard(restoredIdeas);
 //   });
 // };
+
  
 
 
