@@ -39,25 +39,44 @@ function saveBtnToggle() {
   }
 };
 
-function deleteCard(e) {
 
+//
+
+// function deleteCard(e) {
+//   if (e.target.className === 'card-icon delete-btn') {
+//     var card = e.target.parentElement.parentElement;
+//     card.remove();
+//   }
+  
+//    var cardId = e.target.closest('.card').dataset.id;
+//    cardId = parseInt(cardId);
+
+
+//    var newArray = storageArray.filter(function(card) {
+//       if(card.id != cardId) {
+//         return card;
+//       }
+//    });
+
+// };
+
+function deleteCard(e) {
   if (e.target.className === 'card-icon delete-btn') {
     var card = e.target.parentElement.parentElement;
+    storageArray.deleteFromStorage(card.id);
     card.remove();
   }
-
-  var deleteId = e.target.closest('.card').dataset.id;
-  deleteId = parseInt(deleteId);
-
-  var returnDeleteId = storageArray.find(function(deleteBt) {
-    return deleteBt.id === deleteId;
-  });
-
-  // console.log(returnDeleteId);
-
-  returnDeleteId.deleteFromStorage();
 };
 
+// function deleteStoredCard(cardId) {
+//   var newArray = storageArray.filter(function(card) {
+//     if (card.id != cardId) {
+//       return card;
+//     }
+//   });
+//   var stringifiedNewArray = JSON.stringify(newArray);
+//   localStorage.setItem('ideas', stringifiedNewArray);
+// }
 
 
 function clearInputs() {
@@ -66,6 +85,7 @@ function clearInputs() {
 };
 
 function createCard(idea) {
+  // console.log('new card 2', idea.id);
   var newCard =
   `<article class="card" data-id="${idea.id}">
     <header>

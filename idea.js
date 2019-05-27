@@ -11,9 +11,17 @@ class Idea {
     localStorage.setItem('ideas', stringifiedSavedCard);
   };
 
-  deleteFromStorage(card){
-    localStorage.removeItem('ideas');
+  deleteFromStorage(cardId) {
+    var newArray = storageArray.filter(function(card) {
+    if (card.id != cardId) {
+      return card;
+    }
+  });
+  var stringifiedNewArray = JSON.stringify(newArray);
+  localStorage.setItem('ideas', stringifiedNewArray);
+  
   };
+
 
   updateIdea(title, body, storageArray){
     this.title = title;
