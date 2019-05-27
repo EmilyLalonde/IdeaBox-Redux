@@ -140,14 +140,13 @@ function getBodyId(e) {
 function filterSearchTerms (e) {
     var searchText = e.target.value.toLowerCase();
     var results = storageArray.filter(function(idea){
-      return idea.title.toLowerCase().includes(searchText);
+        return idea.title.toLowerCase().includes(searchText);
     })
     document.querySelector(".card-field").innerHTML = '';
     results.forEach(function(idea){
-      createCard(idea)
+    createCard(idea)
     })
 };
-
  
 
 
