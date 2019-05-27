@@ -41,31 +41,50 @@ function saveBtnToggle() {
 
 //
 
-// function deleteCard(e) {
-//   if (e.target.className === 'card-icon delete-btn') {
-//     var card = e.target.parentElement.parentElement;
-//     card.remove();
-//   }
-  
-//    var cardId = e.target.closest('.card').dataset.id;
-//    cardId = parseInt(cardId);
-
-
-//    var newArray = storageArray.filter(function(card) {
-//       if(card.id != cardId) {
-//         return card;
-//       }
-//    });
-
-// };
-
 function deleteCard(e) {
   if (e.target.className === 'card-icon delete-btn') {
     var card = e.target.parentElement.parentElement;
-    storageArray.deleteFromStorage(card.id);
     card.remove();
   }
+  
+   var cardId = e.target.closest('.card').dataset.id;
+   cardId = parseInt(cardId);
+   
+
+   var newArray = storageArray.filter(function(card) {
+      if(card.id === cardId) {
+        console.log(card.id);
+        return card;
+      }
+   });
+
+   // console.log(newArray[0].id);
+     
+    // console.log(newArray);
+    var bob = storageArray.findIndex(function(chicken){
+      if(chicken.id === newArray[0].id) {
+        console.log('hi' + chicken);
+        return chicken;
+      }
+
+    });
+    // console.log(bob);
+    // console.log(storageArray);
+    // storageArray.splice(bob, 1);
+    // console.log(storageArray);
+
+    newArray[0].deleteFromStorage(bob);
+    // localStorage.removeItem(
+
 };
+
+// function deleteCard(e) {
+//   if (e.target.className === 'card-icon delete-btn') {
+//     var card = e.target.parentElement.parentElement;
+//     storageArray.deleteFromStorage(card.id);
+//     card.remove();
+//   }
+// };
 
 // function deleteStoredCard(cardId) {
 //   var newArray = storageArray.filter(function(card) {
@@ -164,10 +183,12 @@ function getBodyId(e) {
     var idea = storageArray.find(function(idea) {
         return idea.id === ideaId;
     });
+
+    console.log(idea);
   // Saves title, body in the Idea class and setsItem into local storage
   // Saves the Id of body and title into storage
 
-    idea.updateIdea(title,body,storageArray)
+    idea.updateIdea(title,body,storageArray);
 };
 
 function filterSearchTerms (e) {

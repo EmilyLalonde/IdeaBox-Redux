@@ -12,13 +12,10 @@ class Idea {
   };
 
   deleteFromStorage(cardId) {
-    var newArray = storageArray.filter(function(card) {
-    if (card.id != cardId) {
-      return card;
-    }
-  });
-  var stringifiedNewArray = JSON.stringify(newArray);
-  localStorage.setItem('ideas', stringifiedNewArray);
+  
+   storageArray.splice(cardId, 1);
+   this.saveToStorage(storageArray);
+
   
   };
 
