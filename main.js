@@ -38,23 +38,44 @@ function saveBtnToggle() {
   }
 };
 
+
+//
+
+// function deleteCard(e) {
+//   if (e.target.className === 'card-icon delete-btn') {
+//     var card = e.target.parentElement.parentElement;
+//     card.remove();
+//   }
+  
+//    var cardId = e.target.closest('.card').dataset.id;
+//    cardId = parseInt(cardId);
+
+
+//    var newArray = storageArray.filter(function(card) {
+//       if(card.id != cardId) {
+//         return card;
+//       }
+//    });
+
+// };
+
 function deleteCard(e) {
   if (e.target.className === 'card-icon delete-btn') {
     var card = e.target.parentElement.parentElement;
-    deleteStoredCard(card.id);
+    storageArray.deleteFromStorage(card.id);
     card.remove();
   }
 };
 
-function deleteStoredCard(cardId) {
-  var newArray = storageArray.filter(function(card) {
-      if (card.id != cardId) {
-        return card;
-      }
-  });
-  var stringifiedNewArray = JSON.stringify(newArray);
-  localStorage.setItem('ideas', stringifiedNewArray); 
-};
+// function deleteStoredCard(cardId) {
+//   var newArray = storageArray.filter(function(card) {
+//     if (card.id != cardId) {
+//       return card;
+//     }
+//   });
+//   var stringifiedNewArray = JSON.stringify(newArray);
+//   localStorage.setItem('ideas', stringifiedNewArray);
+// }
 
 
 function clearInputs() {
@@ -127,13 +148,25 @@ function toggleStar(e) {
 // when page refreshes edited title and body will still be there
 
 function getBodyId(e) {
+   // the variable ideaId targets the database-id in the class of card
     var ideaId = e.target.closest('.card').dataset.id;
+  // Changes the string into a number
     ideaId = parseInt(ideaId);
-    var title = document.querySelector(`.card[data-id="${ideaId}"] .titleIn`).innerText
+
+ 
+  // We are querying in the card class the data-id of titleIn and bodyIn 
+  // and trying to get the inner text to save it into storage
+    var title = document.querySelector(`.card[data-id="${ideaId}"] .titleIn`).innerText;
     var body = document.querySelector(`.card[data-id="${ideaId}"] .bodyIn`).innerText;
+    
+  // shuffles through the storageArray ideas to find the id that is equal
+  // to the from the title || body
     var idea = storageArray.find(function(idea) {
         return idea.id === ideaId;
     });
+  // Saves title, body in the Idea class and setsItem into local storage
+  // Saves the Id of body and title into storage
+
     idea.updateIdea(title,body,storageArray)
 };
 
@@ -144,9 +177,22 @@ function filterSearchTerms (e) {
     })
     document.querySelector(".card-field").innerHTML = '';
     results.forEach(function(idea){
-    createCard(idea)
+      createCard(idea);
     })
-};
+
+}
+
+
+
+
+// function recreateIdeas() {
+//   storageArray = storageArray.map(function(oldIdea) {
+//     var restoredIdeas = new Idea(oldIdea.id, oldIdea.title, oldIdea.body);
+//     createCard(restoredIdeas);
+//   });
+// };
+
+
  
 
 

@@ -10,9 +10,19 @@ class Idea {
     var stringifiedSavedCard = JSON.stringify(storageArray);
     localStorage.setItem('ideas', stringifiedSavedCard);
   };
-  deleteFromStorage(storageArray){
-    localStorage.removeItem(storageArray);
+
+  deleteFromStorage(cardId) {
+    var newArray = storageArray.filter(function(card) {
+    if (card.id != cardId) {
+      return card;
+    }
+  });
+  var stringifiedNewArray = JSON.stringify(newArray);
+  localStorage.setItem('ideas', stringifiedNewArray);
+  
   };
+
+
   updateIdea(title, body, storageArray){
     this.title = title;
     this.body = body;
