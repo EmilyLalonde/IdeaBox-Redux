@@ -16,14 +16,15 @@ window.addEventListener('load', toggleMessage);
 titleInput.addEventListener('keyup', saveBtnToggle);
 cardField.addEventListener('click', deleteCard);
 cardField.addEventListener('click', toggleStar);
-cardField.addEventListener('focusout', storeEditedBody);
 searchInput.addEventListener('keyup', filterSearchTerms);
-function toggleMessage(e) {
-  e.preventDefault();
-  if (cardField.value === 'none') {
-    hiddenMsg.style.display = 'block';
-  } else {
-    hiddenMsg.style.display = 'none';
+cardField.addEventListener('focusout', getBodyId);
+
+
+function toggleMessage () {
+  if(storageArray.length === 0) {
+  hiddenMsg.innerText = 'Please enter your idea above';
+} else {
+  hiddenMsg.innerText = '';
   }
 };
 
@@ -62,7 +63,6 @@ function clearInputs() {
 };
 
 function createCard(idea) {
-  // console.log('new card 2', idea.id);
   var newCard =
   `<article class="card" data-id="${idea.id}">
     <header>
@@ -70,8 +70,8 @@ function createCard(idea) {
       <input type="image" src="images/delete.svg" class="card-icon delete-btn"/>
     </header>
     <section class="body-title">
-    <h2 data-title="${idea.title}" contenteditable = 'true'>${idea.title}</h2>
-    <p data-body="${idea.body}" contenteditable = 'true'>${idea.body}</p>
+    <h2 class ="titleIn" data-id="${idea.title}" contenteditable = 'true'>${idea.title}</h2>
+    <p class ="bodyIn" data-id="${idea.body}" contenteditable = 'true'>${idea.body}</p>
   </section>
     <footer>
       <input type="image" src="images/upvote.svg" class="card-icon" id="upvote-btn"/>
@@ -94,6 +94,7 @@ function saveCardInfo(e) {
   savedInfo.saveToStorage(storageArray);
   createCard(savedInfo);
   clearInputs();
+  toggleMessage();
 };
 
 function recreateIdeas() {
@@ -105,14 +106,14 @@ function recreateIdeas() {
 };
 
 function toggleStar(e) {
-  if(e.target.classList.contains('card-icon')) {
+  if(e.target.classList.contains('star-active')) {
     var star = e.target.parentElement.parentElement;
     var starId = star.dataset.id;
     console.log(starId);
     var storeIdStar = storageArray.find(function(idea) {
         return idea.id === parseInt(starId);
     });
-    storeIdStar.star = !storeIdStar.star
+    storeIdStar.star = !storeIdStar.star;
     var notherStar = e.target;
     if(storeIdStar.star === true) {
        notherStar.src = 'images/star-active.svg';
@@ -125,25 +126,15 @@ function toggleStar(e) {
 // target body and title to store it in local storage 
 // when page refreshes edited title and body will still be there
 
-function storeEditedBody(e) {
-    var cardShown = e.target.parentElement.parentElement;
-    console.log(cardShown);
-
-    var bodyArray = [];
-    var titleArray = [];
-
-    var bodyValue = bodyArray.value;
-    var titleValue = titleInput.value; 
-
-    bodyValue.push(bodyArray);
-    titleValue.push(titleArray);
-
-    console.log(bodyArray);
-
-    var stringiFiedBodyArray = JSON.stringify(bodyArray);
-    localStorage.setItem('body', stringiFiedBodyArray);
-    var stringiFiedTitleArray = JSON.stringify(titleArray);
-    localStorage.setItem('title', stringiFiedTitleArray);
+function getBodyId(e) {
+    var ideaId = e.target.closest('.card').dataset.id;
+    ideaId = parseInt(ideaId);
+    var title = document.querySelector(`.card[data-id="${ideaId}"] .titleIn`).innerText
+    var body = document.querySelector(`.card[data-id="${ideaId}"] .bodyIn`).innerText;
+    var idea = storageArray.find(function(idea) {
+        return idea.id === ideaId;
+    });
+    idea.updateIdea(title,body,storageArray)
 };
 
 function filterSearchTerms (e) {
@@ -155,20 +146,7 @@ function filterSearchTerms (e) {
     results.forEach(function(idea){
     createCard(idea)
     })
-}
-
-
-
-
-
-
-
-// function recreateIdeas() {
-//   storageArray = storageArray.map(function(oldIdea) {
-//     var restoredIdeas = new Idea(oldIdea.id, oldIdea.title, oldIdea.body);
-//     createCard(restoredIdeas);
-//   });
-// };
+};
  
 
 
