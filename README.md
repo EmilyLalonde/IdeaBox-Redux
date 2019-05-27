@@ -24,4 +24,4 @@ This is the first group project in Mod 1.
 ![image](https://user-images.githubusercontent.com/47184994/58433527-f5ce2400-8074-11e9-955b-3aeba6345bae.png)
 
 ### Our Mobile Comp Extended:
-
+![image](https://user-images.githubusercontent.com/47184994/58433576-2615c280-8075-11e9-9c31-decdece7203f.png)
