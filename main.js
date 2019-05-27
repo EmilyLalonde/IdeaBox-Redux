@@ -20,12 +20,11 @@ searchInput.addEventListener('keyup', filterSearchTerms);
 cardField.addEventListener('focusout', getBodyId);
 
 
-function toggleMessage(e) {
-  e.preventDefault();
-  if (cardField.value === 'none') {
-    hiddenMsg.style.display = 'block';
-  } else {
-    hiddenMsg.style.display = 'none';
+function toggleMessage () {
+  if(storageArray.length === 0) {
+  hiddenMsg.innerText = 'Please enter your idea above';
+} else {
+  hiddenMsg.innerText = '';
   }
 };
 
@@ -64,7 +63,6 @@ function clearInputs() {
 };
 
 function createCard(idea) {
-  // console.log('new card 2', idea.id);
   var newCard =
   `<article class="card" data-id="${idea.id}">
     <header>
@@ -96,6 +94,7 @@ function saveCardInfo(e) {
   savedInfo.saveToStorage(storageArray);
   createCard(savedInfo);
   clearInputs();
+  toggleMessage();
 };
 
 function recreateIdeas() {
@@ -130,17 +129,12 @@ function toggleStar(e) {
 function getBodyId(e) {
     var ideaId = e.target.closest('.card').dataset.id;
     ideaId = parseInt(ideaId);
-
     var title = document.querySelector(`.card[data-id="${ideaId}"] .titleIn`).innerText
     var body = document.querySelector(`.card[data-id="${ideaId}"] .bodyIn`).innerText;
-    
-
     var idea = storageArray.find(function(idea) {
         return idea.id === ideaId;
     });
-
     idea.updateIdea(title,body,storageArray)
-
 };
 
 function filterSearchTerms (e) {
@@ -152,20 +146,8 @@ function filterSearchTerms (e) {
     results.forEach(function(idea){
       createCard(idea)
     })
+};
 
-
-
-}
-
-
-
-
-// function recreateIdeas() {
-//   storageArray = storageArray.map(function(oldIdea) {
-//     var restoredIdeas = new Idea(oldIdea.id, oldIdea.title, oldIdea.body);
-//     createCard(restoredIdeas);
-//   });
-// };
  
 
 
