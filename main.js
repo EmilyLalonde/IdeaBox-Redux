@@ -10,15 +10,22 @@ var cardField = document.querySelector('.card-field');
 var hiddenMsg = document.querySelector('.hidden');
 var storageArray = JSON.parse(localStorage.getItem('ideas')) || [];
 
-window.addEventListener('load', recreateIdeas );
+window.addEventListener('load', windowLoad);
 saveBtn.addEventListener('click', saveCardInfo);
-window.addEventListener('load', toggleMessage);
 titleInput.addEventListener('keyup', saveBtnToggle);
-cardField.addEventListener('click', deleteCard);
-cardField.addEventListener('click', toggleStar);
+cardField.addEventListener('click', cardFieldClick);
 searchInput.addEventListener('keyup', filterSearchTerms);
 cardField.addEventListener('focusout', getBodyId);
 
+function cardFieldClick() {
+  deleteCard();
+  toggleStar();
+};
+
+function windowLoad() {
+  recreateIdeas();
+  toggleMessage();
+};
 
 function toggleMessage () {
   if(storageArray.length === 0) {
@@ -38,64 +45,28 @@ function saveBtnToggle() {
   }
 };
 
-
-//
-
 function deleteCard(e) {
   if (e.target.className === 'card-icon delete-btn') {
     var card = e.target.parentElement.parentElement;
     card.remove();
   }
-  
    var cardId = e.target.closest('.card').dataset.id;
    cardId = parseInt(cardId);
-   
-
+ 
    var newArray = storageArray.filter(function(card) {
       if(card.id === cardId) {
         console.log(card.id);
         return card;
       }
    });
-
-   // console.log(newArray[0].id);
-     
-    // console.log(newArray);
     var bob = storageArray.findIndex(function(chicken){
       if(chicken.id === newArray[0].id) {
         console.log('hi' + chicken);
         return chicken;
       }
-
     });
-    // console.log(bob);
-    // console.log(storageArray);
-    // storageArray.splice(bob, 1);
-    // console.log(storageArray);
-
     newArray[0].deleteFromStorage(bob);
-    // localStorage.removeItem(
-
 };
-
-// function deleteCard(e) {
-//   if (e.target.className === 'card-icon delete-btn') {
-//     var card = e.target.parentElement.parentElement;
-//     storageArray.deleteFromStorage(card.id);
-//     card.remove();
-//   }
-// };
-
-// function deleteStoredCard(cardId) {
-//   var newArray = storageArray.filter(function(card) {
-//     if (card.id != cardId) {
-//       return card;
-//     }
-//   });
-//   var stringifiedNewArray = JSON.stringify(newArray);
-//   localStorage.setItem('ideas', stringifiedNewArray);
-// }
-
 
 function clearInputs() {
   titleInput.value = '';
@@ -122,7 +93,6 @@ function createCard(idea) {
   cardField.insertAdjacentHTML('afterbegin', newCard);
   };
  
-
 function saveCardInfo(e) {
   e.preventDefault();
   console.log('new card');
@@ -163,31 +133,14 @@ function toggleStar(e) {
   }
 };
 
-// target body and title to store it in local storage 
-// when page refreshes edited title and body will still be there
-
 function getBodyId(e) {
-   // the variable ideaId targets the database-id in the class of card
     var ideaId = e.target.closest('.card').dataset.id;
-  // Changes the string into a number
     ideaId = parseInt(ideaId);
-
- 
-  // We are querying in the card class the data-id of titleIn and bodyIn 
-  // and trying to get the inner text to save it into storage
     var title = document.querySelector(`.card[data-id="${ideaId}"] .titleIn`).innerText;
     var body = document.querySelector(`.card[data-id="${ideaId}"] .bodyIn`).innerText;
-    
-  // shuffles through the storageArray ideas to find the id that is equal
-  // to the from the title || body
     var idea = storageArray.find(function(idea) {
         return idea.id === ideaId;
     });
-
-    console.log(idea);
-  // Saves title, body in the Idea class and setsItem into local storage
-  // Saves the Id of body and title into storage
-
     idea.updateIdea(title,body,storageArray);
 };
 
@@ -195,13 +148,12 @@ function filterSearchTerms (e) {
     var searchText = e.target.value.toLowerCase();
     var results = storageArray.filter(function(idea){
         return idea.title.toLowerCase().includes(searchText);
-    })
+    });
     document.querySelector(".card-field").innerHTML = '';
     results.forEach(function(idea){
       createCard(idea);
-    })
-
-}
+    });
+};
 
 
 
