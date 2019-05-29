@@ -38,9 +38,6 @@ function saveBtnToggle() {
   }
 };
 
-
-//
-
 function deleteCard(e) {
   if (e.target.className === 'card-icon delete-btn') {
     var card = e.target.parentElement.parentElement;
@@ -53,49 +50,16 @@ function deleteCard(e) {
 
    var newArray = storageArray.filter(function(card) {
       if(card.id === cardId) {
-        console.log(card.id);
         return card;
       }
    });
-
-   // console.log(newArray[0].id);
-     
-    // console.log(newArray);
     var bob = storageArray.findIndex(function(chicken){
       if(chicken.id === newArray[0].id) {
-        console.log('hi' + chicken);
         return chicken;
       }
-
     });
-    // console.log(bob);
-    // console.log(storageArray);
-    // storageArray.splice(bob, 1);
-    // console.log(storageArray);
-
     newArray[0].deleteFromStorage(bob);
-    // localStorage.removeItem(
-
 };
-
-// function deleteCard(e) {
-//   if (e.target.className === 'card-icon delete-btn') {
-//     var card = e.target.parentElement.parentElement;
-//     storageArray.deleteFromStorage(card.id);
-//     card.remove();
-//   }
-// };
-
-// function deleteStoredCard(cardId) {
-//   var newArray = storageArray.filter(function(card) {
-//     if (card.id != cardId) {
-//       return card;
-//     }
-//   });
-//   var stringifiedNewArray = JSON.stringify(newArray);
-//   localStorage.setItem('ideas', stringifiedNewArray);
-// }
-
 
 function clearInputs() {
   titleInput.value = '';
@@ -131,12 +95,8 @@ function createCard(idea) {
 
 function saveCardInfo(e) {
   e.preventDefault();
-  console.log('new card');
-  console.log(storageArray);
   var savedInfo = new Idea(Date.now(), titleInput.value, bodyInput.value);
-  console.log(storageArray);
   storageArray.push(savedInfo);
-  console.log('yeehaw',storageArray)
   savedInfo.saveToStorage(storageArray);
   console.log(storageArray);
   createCard(savedInfo);
@@ -169,31 +129,14 @@ function toggleStar(e) {
   }
 };
 
-// target body and title to store it in local storage 
-// when page refreshes edited title and body will still be there
-
 function getBodyId(e) {
-   // the variable ideaId targets the database-id in the class of card
     var ideaId = e.target.closest('.card').dataset.id;
-  // Changes the string into a number
     ideaId = parseInt(ideaId);
-
- 
-  // We are querying in the card class the data-id of titleIn and bodyIn 
-  // and trying to get the inner text to save it into storage
     var title = document.querySelector(`.card[data-id="${ideaId}"] .titleIn`).innerText;
     var body = document.querySelector(`.card[data-id="${ideaId}"] .bodyIn`).innerText;
-    
-  // shuffles through the storageArray ideas to find the id that is equal
-  // to the from the title || body
     var idea = storageArray.find(function(idea) {
         return idea.id === ideaId;
     });
-
-    console.log(idea);
-  // Saves title, body in the Idea class and setsItem into local storage
-  // Saves the Id of body and title into storage
-
     idea.updateIdea(title,body,storageArray);
 };
 
@@ -206,18 +149,8 @@ function filterSearchTerms (e) {
     results.forEach(function(idea){
       createCard(idea);
     })
+};
 
-}
-
-
-
-
-// function recreateIdeas() {
-//   storageArray = storageArray.map(function(oldIdea) {
-//     var restoredIdeas = new Idea(oldIdea.id, oldIdea.title, oldIdea.body);
-//     createCard(restoredIdeas);
-//   });
-// };
 
 
  
