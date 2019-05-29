@@ -1,5 +1,5 @@
 class Idea {
-  constructor(id, title, body, star){
+  constructor(id, title, body, star){ 
     this.id = id;
     this.title = title;
     this.body = body;
@@ -12,27 +12,22 @@ class Idea {
   };
 
   deleteFromStorage(cardId) {
-  //const a = // storageArray.filter((card) => {
-    //return card !== cardId
- // })
+   console.log('the parameter', cardId);
 
-   var deleteCard = storageArray.filter(function(card) {
-    return card !== cardId;
+   var updatedStorageArray = storageArray.filter(function(card) {
+    console.log('this is the card ',card.id);
+    return card.id !== cardId;
    });
    //  console.log('cardId in IdeaClass',cardId);
+   console.log( 'hey waddup', updatedStorageArray);
 
-   // storageArray.splice(cardId, 1);
-
-   // this.saveToStorage(storageArray);
-
-   this.saveToStorage(deleteCard);
+   this.saveToStorage(updatedStorageArray);
   };
 
   updateStar(storageArray) {
     this.star = !this.star;
     this.saveToStorage(storageArray);
   }
-
 
   updateIdea(title, body, storageArray){
     this.title = title;

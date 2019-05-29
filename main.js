@@ -19,7 +19,6 @@ cardField.addEventListener('click', toggleStar);
 searchInput.addEventListener('keyup', filterSearchTerms);
 cardField.addEventListener('focusout', getBodyId);
 
-
 function toggleMessage () {
   if(storageArray.length === 0) {
   hiddenMsg.innerText = 'Please enter your idea above';
@@ -38,64 +37,30 @@ function saveBtnToggle() {
   }
 };
 
-
-//
-
 function deleteCard(e) {
   if (e.target.className === 'card-icon delete-btn') {
     var card = e.target.parentElement.parentElement;
     card.remove();
-  }
-  
+  };
    var cardId = e.target.closest('.card').dataset.id;
+
    cardId = parseInt(cardId);
    
+  console.log('Hey cardId', cardId);
 
    var newArray = storageArray.filter(function(card) {
       if(card.id === cardId) {
-        console.log(card.id);
+        console.log('this is the card.id',card.id);
         return card;
       }
    });
 
-   // console.log(newArray[0].id);
-     
-    // console.log(newArray);
-    var bob = storageArray.findIndex(function(chicken){
-      if(chicken.id === newArray[0].id) {
-        console.log('hi' + chicken);
-        return chicken;
-      }
+   console.log('newArray without id and index', newArray);
 
-    });
-    // console.log(bob);
-    // console.log(storageArray);
-    // storageArray.splice(bob, 1);
-    // console.log(storageArray);
+   // console.log('newArray with id', newArray[0].id);
 
-    newArray[0].deleteFromStorage(bob);
-    // localStorage.removeItem(
-
+    newArray[0].deleteFromStorage(cardId);
 };
-
-// function deleteCard(e) {
-//   if (e.target.className === 'card-icon delete-btn') {
-//     var card = e.target.parentElement.parentElement;
-//     storageArray.deleteFromStorage(card.id);
-//     card.remove();
-//   }
-// };
-
-// function deleteStoredCard(cardId) {
-//   var newArray = storageArray.filter(function(card) {
-//     if (card.id != cardId) {
-//       return card;
-//     }
-//   });
-//   var stringifiedNewArray = JSON.stringify(newArray);
-//   localStorage.setItem('ideas', stringifiedNewArray);
-// }
-
 
 function clearInputs() {
   titleInput.value = '';
@@ -107,8 +72,7 @@ function createCard(idea) {
        starSrc = 'images/star-active.svg';
     } else {
       starSrc = 'images/star.svg';
-   }
-
+   };
   var newCard =
   `<article class="card" data-id="${idea.id}">
     <header>
@@ -128,17 +92,11 @@ function createCard(idea) {
   cardField.insertAdjacentHTML('afterbegin', newCard);
   };
  
-
 function saveCardInfo(e) {
   e.preventDefault();
-  console.log('new card');
-  console.log(storageArray);
   var savedInfo = new Idea(Date.now(), titleInput.value, bodyInput.value);
-  console.log(storageArray);
   storageArray.push(savedInfo);
-  console.log('yeehaw',storageArray)
   savedInfo.saveToStorage(storageArray);
-  console.log(storageArray);
   createCard(savedInfo);
   clearInputs();
   toggleMessage();
@@ -153,49 +111,45 @@ function recreateIdeas() {
 };
 
 function toggleStar(e) {
-  
   if(e.target.classList.contains('star-active')) {
     var star = e.target.parentElement.parentElement;
     var starId = star.dataset.id;
-    var storeIdStar = storageArray.find(function(obj){return obj.id === parseInt(starId)})
-    console.log(storeIdStar);
+    var storeIdStar = storageArray.find(function(obj) {
+      return obj.id === parseInt(starId);
+    });
     storeIdStar.updateStar(storageArray);
-    var notherStar = e.target;
+    var toggleStar = e.target;
     if(storeIdStar.star === true) {
-       notherStar.src = 'images/star-active.svg';
+      toggleStar.src = 'images/star-active.svg';
     } else {
-    notherStar.src = 'images/star.svg';
+      toggleStar.src = 'images/star.svg';
    }
   }
 };
 
-// target body and title to store it in local storage 
-// when page refreshes edited title and body will still be there
-
 function getBodyId(e) {
-   // the variable ideaId targets the database-id in the class of card
     var ideaId = e.target.closest('.card').dataset.id;
-  // Changes the string into a number
     ideaId = parseInt(ideaId);
-
- 
-  // We are querying in the card class the data-id of titleIn and bodyIn 
-  // and trying to get the inner text to save it into storage
     var title = document.querySelector(`.card[data-id="${ideaId}"] .titleIn`).innerText;
     var body = document.querySelector(`.card[data-id="${ideaId}"] .bodyIn`).innerText;
-    
-  // shuffles through the storageArray ideas to find the id that is equal
-  // to the from the title || body
     var idea = storageArray.find(function(idea) {
         return idea.id === ideaId;
     });
-
-    console.log(idea);
-  // Saves title, body in the Idea class and setsItem into local storage
-  // Saves the Id of body and title into storage
-
+    // blurInput();
     idea.updateIdea(title,body,storageArray);
 };
+
+// function blurInput(e) {
+//   if(e.keyCode === 13) {
+//     var blurText = document.querySelector('.titleIn');
+//     blurText.blur();
+//   }
+
+//   if(e.keyCode === 13) {
+//     var blurText = document.querySelector('.bodyIn');
+//     blurText.blur();
+//   }
+// }
 
 function filterSearchTerms (e) {
     var searchText = e.target.value.toLowerCase();
@@ -205,8 +159,7 @@ function filterSearchTerms (e) {
     document.querySelector(".card-field").innerHTML = '';
     results.forEach(function(idea){
       createCard(idea);
-    })
-
+    });
 }
 
 
