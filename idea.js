@@ -1,9 +1,9 @@
 class Idea {
-  constructor(id, title, body){
+  constructor(id, title, body, star){
     this.id = id;
     this.title = title;
     this.body = body;
-    this.star = false;
+    this.star = star || false;
     this.quality = ['Swill', 'Plausible', 'Genius'];
   };
   saveToStorage (storageArray){
@@ -12,12 +12,26 @@ class Idea {
   };
 
   deleteFromStorage(cardId) {
-  
-   storageArray.splice(cardId, 1);
-   this.saveToStorage(storageArray);
+  //const a = // storageArray.filter((card) => {
+    //return card !== cardId
+ // })
 
-  
+   var deleteCard = storageArray.filter(function(card) {
+    return card !== cardId;
+   });
+   //  console.log('cardId in IdeaClass',cardId);
+
+   // storageArray.splice(cardId, 1);
+
+   // this.saveToStorage(storageArray);
+
+   this.saveToStorage(deleteCard);
   };
+
+  updateStar(storageArray) {
+    this.star = !this.star;
+    this.saveToStorage(storageArray);
+  }
 
 
   updateIdea(title, body, storageArray){
