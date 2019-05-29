@@ -19,7 +19,6 @@ cardField.addEventListener('click', toggleStar);
 searchInput.addEventListener('keyup', filterSearchTerms);
 cardField.addEventListener('focusout', getBodyId);
 
-
 function toggleMessage () {
   if(storageArray.length === 0) {
   hiddenMsg.innerText = 'Please enter your idea above';
@@ -42,23 +41,25 @@ function deleteCard(e) {
   if (e.target.className === 'card-icon delete-btn') {
     var card = e.target.parentElement.parentElement;
     card.remove();
-  }
-  
+  };
    var cardId = e.target.closest('.card').dataset.id;
+
    cardId = parseInt(cardId);
    
+  console.log('Hey cardId', cardId);
 
    var newArray = storageArray.filter(function(card) {
       if(card.id === cardId) {
+        console.log('this is the card.id',card.id);
         return card;
       }
    });
-    var bob = storageArray.findIndex(function(chicken){
-      if(chicken.id === newArray[0].id) {
-        return chicken;
-      }
-    });
-    newArray[0].deleteFromStorage(bob);
+
+   console.log('newArray without id and index', newArray);
+
+   // console.log('newArray with id', newArray[0].id);
+
+    newArray[0].deleteFromStorage(cardId);
 };
 
 function clearInputs() {
@@ -71,8 +72,7 @@ function createCard(idea) {
        starSrc = 'images/star-active.svg';
     } else {
       starSrc = 'images/star.svg';
-   }
-
+   };
   var newCard =
   `<article class="card" data-id="${idea.id}">
     <header>
@@ -92,13 +92,11 @@ function createCard(idea) {
   cardField.insertAdjacentHTML('afterbegin', newCard);
   };
  
-
 function saveCardInfo(e) {
   e.preventDefault();
   var savedInfo = new Idea(Date.now(), titleInput.value, bodyInput.value);
   storageArray.push(savedInfo);
   savedInfo.saveToStorage(storageArray);
-  console.log(storageArray);
   createCard(savedInfo);
   clearInputs();
   toggleMessage();
@@ -113,18 +111,18 @@ function recreateIdeas() {
 };
 
 function toggleStar(e) {
-  
   if(e.target.classList.contains('star-active')) {
     var star = e.target.parentElement.parentElement;
     var starId = star.dataset.id;
-    var storeIdStar = storageArray.find(function(obj){return obj.id === parseInt(starId)})
-    console.log(storeIdStar);
+    var storeIdStar = storageArray.find(function(obj) {
+      return obj.id === parseInt(starId);
+    });
     storeIdStar.updateStar(storageArray);
-    var notherStar = e.target;
+    var toggleStar = e.target;
     if(storeIdStar.star === true) {
-       notherStar.src = 'images/star-active.svg';
+      toggleStar.src = 'images/star-active.svg';
     } else {
-    notherStar.src = 'images/star.svg';
+      toggleStar.src = 'images/star.svg';
    }
   }
 };
@@ -137,8 +135,21 @@ function getBodyId(e) {
     var idea = storageArray.find(function(idea) {
         return idea.id === ideaId;
     });
+    // blurInput();
     idea.updateIdea(title,body,storageArray);
 };
+
+// function blurInput(e) {
+//   if(e.keyCode === 13) {
+//     var blurText = document.querySelector('.titleIn');
+//     blurText.blur();
+//   }
+
+//   if(e.keyCode === 13) {
+//     var blurText = document.querySelector('.bodyIn');
+//     blurText.blur();
+//   }
+// }
 
 function filterSearchTerms (e) {
     var searchText = e.target.value.toLowerCase();
@@ -148,8 +159,19 @@ function filterSearchTerms (e) {
     document.querySelector(".card-field").innerHTML = '';
     results.forEach(function(idea){
       createCard(idea);
-    })
-};
+    });
+}
+
+
+
+
+// function recreateIdeas() {
+//   storageArray = storageArray.map(function(oldIdea) {
+//     var restoredIdeas = new Idea(oldIdea.id, oldIdea.title, oldIdea.body);
+//     createCard(restoredIdeas);
+//   });
+// };
+
 
 
 
