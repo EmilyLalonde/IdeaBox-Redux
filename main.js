@@ -103,10 +103,16 @@ function clearInputs() {
 };
 
 function createCard(idea) {
+   if(idea.star === true) {
+       starSrc = 'images/star-active.svg';
+    } else {
+      starSrc = 'images/star.svg';
+   }
+
   var newCard =
   `<article class="card" data-id="${idea.id}">
     <header>
-      <input type="image" src="images/star.svg" class="card-icon star-active" id="star-btn"/>
+      <input type="image" src="${starSrc}" class="card-icon star-active" id="star-btn"/>
       <input type="image" src="images/delete.svg" class="card-icon delete-btn"/>
     </header>
     <section class="body-title">
@@ -132,6 +138,7 @@ function saveCardInfo(e) {
   storageArray.push(savedInfo);
   console.log('yeehaw',storageArray)
   savedInfo.saveToStorage(storageArray);
+  console.log(storageArray);
   createCard(savedInfo);
   clearInputs();
   toggleMessage();
@@ -139,21 +146,20 @@ function saveCardInfo(e) {
 
 function recreateIdeas() {
   storageArray = storageArray.map(function(oldIdea) {
-    var restoredIdeas = new Idea(oldIdea.id, oldIdea.title, oldIdea.body);
+    var restoredIdeas = new Idea(oldIdea.id, oldIdea.title, oldIdea.body, oldIdea.star);
     createCard(restoredIdeas);
     return restoredIdeas;
   });
 };
 
 function toggleStar(e) {
+  
   if(e.target.classList.contains('star-active')) {
     var star = e.target.parentElement.parentElement;
     var starId = star.dataset.id;
-    console.log(starId);
-    var storeIdStar = storageArray.find(function(idea) {
-        return idea.id === parseInt(starId);
-    });
-    storeIdStar.star = !storeIdStar.star;
+    var storeIdStar = storageArray.find(function(obj){return obj.id === parseInt(starId)})
+    console.log(storeIdStar);
+    storeIdStar.updateStar(storageArray);
     var notherStar = e.target;
     if(storeIdStar.star === true) {
        notherStar.src = 'images/star-active.svg';
