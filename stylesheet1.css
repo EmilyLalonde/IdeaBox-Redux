@@ -12,48 +12,47 @@ nav {
 h1 {
   background-color: #201f3d;
   color: white;
-  margin-top: 20px;
   float: right;
-  margin-right: 35%;
+  margin: 20px 35% 0 0;
 }
 
 .overlay {
   background-color: #201f3d;
-  position: absolute;
-  z-index: 1;
-  width: 100%;
   height: 50px;
+  position: absolute;
+  width: 100%;
+  z-index: 1;
 }
 
 .overlay > label {
+  border-bottom: 2px solid white;
+  border-top: 2px solid white;
   cursor: pointer;
   display: block;
-  position: relative;
-  left: 20px;
-  width: 30px;
-  height: 20px;
-  border-top: 2px solid white;
-  border-bottom: 2px solid white;
   float: left;
+  height: 20px;
+  left: 20px;
   margin-top: 20px;
+  position: relative;
+  width: 30px;
 }
 
 .overlay > label::before {
+  border-top: 2px solid white;
   content: '';
   display: block;
   position: relative;
   top: 7px;
-  border-top: 2px solid white;
 }
 
 .verticalNav {
   background-color: #201f3d;
-  position: relative;
-  top: -450px;
+  box-sizing: border-box;
+  font-size: 22px;
   height: 500px;
   padding-top: 20px;
-  font-size: 22px;
-  box-sizing: border-box;
+  position: relative;
+  top: -450px;
   transition: top 600ms cubic-bezier(0.17, 0.04, 0.03, 0.94);
   width: 100%;
 }
@@ -62,15 +61,15 @@ h1 {
   display: block;
   color: white;
   font-weight: 100;
-  padding-left: 5%;
   margin-top: 20px;
+  padding-left: 5%;
   text-decoration: none;
 }
 
 .verticalNav a:hover {
-  width: 100%;
   background-color: #d14119;
   border-left: 8px #f58e72 solid;
+  width: 100%;
 }
 
 #toggle {
@@ -210,14 +209,14 @@ h3 {
   display: grid;
   height: 100vh;
   grid-template-columns: 100%;
-    grid-gap: 15px 15px;
-    grid-template-rows: repeat(3, 1fr);
-    padding: 20px;
+  grid-gap: 15px 15px;
+  grid-template-rows: repeat(3, 1fr);
+  padding: 20px;
 }
 
 .card-icon {
-  height: 20px;
-  width: 20px;
+  height: 30px;
+  width: 30px;
 }
 
 article {
@@ -242,9 +241,9 @@ p {
 }
 
 footer {
+  background-color: #5356a4;
   display: flex;
   justify-content: space-between;
-  background-color: #5356a4;
 }
 
 h4 {
@@ -318,11 +317,11 @@ h4 {
   }
 
   .card-field {
-	grid-area: bottomSection;
-  display:grid;
-  grid-template-columns: 24% 24% 24% 24%;
-  grid-gap: 10px 10px;
-  grid-template-rows: repeat(3,1fr);
-  padding: 20px;
+    display:grid;
+    grid-area: bottomSection;
+    grid-gap: 10px 10px;
+    grid-template-columns: 24% 24% 24% 24%;
+    grid-template-rows: repeat(3,1fr);
+    padding: 20px;
   }
 } 
