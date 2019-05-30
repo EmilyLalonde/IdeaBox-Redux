@@ -8,6 +8,15 @@ This is the first group project in Mod 1.
 * Css
 * Vanilla JavaScript
 
+#### Learning Goals:
+
+* Get more practice with vanilla JavaScript and building out functionality on a web page.
+* Become familiar with localStorage and JSON and how it can be used to make information persist on a page.
+* Understand how to utilize data-attributes.
+* Become better at producing clean/dry code.
+
+This project is an idea keeping app where you can rate the quality of your ideas and favorite them.
+
 ### Desktop Comp:
 ![image](https://user-images.githubusercontent.com/47184994/58114507-1dc11180-7bb5-11e9-8fd3-92c0a87a6532.png)
 
