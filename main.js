@@ -19,7 +19,7 @@ cardField.addEventListener('click', deleteCard);
 cardField.addEventListener('click', toggleStar);
 searchInput.addEventListener('keyup', filterSearchTerms);
 cardField.addEventListener('focusout', getBodyId);
-cardField.addEventListener('click', listenForClick);
+cardField.addEventListener('click', targetVoteButton);
 
 function toggleMessage() {
   if(storageArray.length === 0) {
@@ -141,13 +141,13 @@ function filterSearchTerms(e) {
     });
 };
 
-function listenForClick(e) {
+function targetVoteButton(e) {
   if (e.target.id === "upvote-btn" || "downvote-btn") {
-    upvote(e)
+    filterQuality(e)
   }
  };
 
-function upvote(e) {
+function filterQuality(e) {
     var cardToUpdate = e.target.closest('.card').dataset.id;
     var cardDataAttr = parseInt(cardToUpdate);
     var ideaListIndex = findIndex(cardDataAttr);
@@ -158,10 +158,10 @@ function upvote(e) {
     qualityList--
   }
   storageArray[ideaListIndex].updateQuality(qualityList);
-  updateQualityDisplay(cardToUpdate, qualityList);
+  updateQualityText(cardToUpdate, qualityList);
 };
 
-function updateQualityDisplay(cardId, quality) {
+function updateQualityText(cardId, quality) {
   document.querySelector(`.card[data-id="${cardId}"] .quality-text-card`).innerText = qualityList[quality];
  };
 
