@@ -21,7 +21,7 @@ searchInput.addEventListener('keyup', filterSearchTerms);
 cardField.addEventListener('focusout', getBodyId);
 cardField.addEventListener('click', listenForClick);
 
-function toggleMessage () {
+function toggleMessage() {
   if(storageArray.length === 0) {
   hiddenMsg.innerText = 'Please enter your idea above';
 } else {
@@ -127,23 +127,10 @@ function getBodyId(e) {
     var idea = storageArray.find(function(idea) {
         return idea.id === ideaId;
     });
-    // blurInput();
     idea.updateIdea(title,body,storageArray);
 };
 
-// function blurInput(e) {
-//   if(e.keyCode === 13) {
-//     var blurText = document.querySelector('.titleIn');
-//     blurText.blur();
-//   }
-
-//   if(e.keyCode === 13) {
-//     var blurText = document.querySelector('.bodyIn');
-//     blurText.blur();
-//   }
-// }
-
-function filterSearchTerms (e) {
+function filterSearchTerms(e) {
     var searchText = e.target.value.toLowerCase();
     var results = storageArray.filter(function(idea){
         return idea.title.toLowerCase().includes(searchText) || idea.body.toLowerCase().includes(searchText);
@@ -153,8 +140,6 @@ function filterSearchTerms (e) {
       createCard(idea);
     });
 };
-
-
 
 function listenForClick(e) {
   if (e.target.id === "upvote-btn" || "downvote-btn") {
@@ -173,14 +158,12 @@ function upvote(e) {
     qualityList--
   }
   storageArray[ideaListIndex].updateQuality(qualityList);
-  console.log('something', cardToUpdate);
   updateQualityDisplay(cardToUpdate, qualityList);
 };
 
 function updateQualityDisplay(cardId, quality) {
   document.querySelector(`.card[data-id="${cardId}"] .quality-text-card`).innerText = qualityList[quality];
  };
- //when we click upvote or downvote we are going to change the quality and we need to display that change in quality to the card
 
  function findIndex(card) {
   var cardId = card;
