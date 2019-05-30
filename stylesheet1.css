@@ -70,6 +70,7 @@ h1 {
 .verticalNav a:hover {
   width: 100%;
   background-color: #d14119;
+  border-left: 8px #f58e72 solid;
 }
 
 #toggle {
