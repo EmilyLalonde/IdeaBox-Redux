@@ -9,6 +9,7 @@ var searchInput = document.querySelector('.search-input');
 var cardField = document.querySelector('.card-field');
 var hiddenMsg = document.querySelector('.hidden');
 var storageArray = JSON.parse(localStorage.getItem('ideas')) || [];
+var qualityList = ['Swill', 'Plausible', 'Genius'];
 
 window.addEventListener('load', recreateIdeas );
 saveBtn.addEventListener('click', saveCardInfo);
@@ -18,6 +19,7 @@ cardField.addEventListener('click', deleteCard);
 cardField.addEventListener('click', toggleStar);
 searchInput.addEventListener('keyup', filterSearchTerms);
 cardField.addEventListener('focusout', getBodyId);
+cardField.addEventListener('click', listenForClick);
 
 function toggleMessage () {
   if(storageArray.length === 0) {
@@ -43,22 +45,12 @@ function deleteCard(e) {
     card.remove();
   };
    var cardId = e.target.closest('.card').dataset.id;
-
    cardId = parseInt(cardId);
-   
-  console.log('Hey cardId', cardId);
-
    var newArray = storageArray.filter(function(card) {
       if(card.id === cardId) {
-        console.log('this is the card.id',card.id);
         return card;
       }
    });
-
-   console.log('newArray without id and index', newArray);
-
-   // console.log('newArray with id', newArray[0].id);
-
     newArray[0].deleteFromStorage(cardId);
 };
 
@@ -85,7 +77,7 @@ function createCard(idea) {
   </section>
     <footer>
       <input type="image" src="images/upvote.svg" class="card-icon" id="upvote-btn"/>
-      <h4>Quality: Swill</h4>
+      <h4>Quality: <span  class="quality-text-card">${qualityList[idea.quality]}</span></h4>
       <input type="image" src="images/downvote.svg" class="card-icon" id="downvote-btn"/>
     </footer>
   </article>`
@@ -94,7 +86,7 @@ function createCard(idea) {
  
 function saveCardInfo(e) {
   e.preventDefault();
-  var savedInfo = new Idea(Date.now(), titleInput.value, bodyInput.value);
+  var savedInfo = new Idea (Date.now(), titleInput.value, bodyInput.value, 0);
   storageArray.push(savedInfo);
   savedInfo.saveToStorage(storageArray);
   createCard(savedInfo);
@@ -160,21 +152,42 @@ function filterSearchTerms (e) {
     results.forEach(function(idea){
       createCard(idea);
     });
-}
+};
 
 
 
+function listenForClick(e) {
+  if (e.target.id === "upvote-btn" || "downvote-btn") {
+    upvote(e)
+  }
+ };
 
-// function recreateIdeas() {
-//   storageArray = storageArray.map(function(oldIdea) {
-//     var restoredIdeas = new Idea(oldIdea.id, oldIdea.title, oldIdea.body);
-//     createCard(restoredIdeas);
-//   });
-// };
+function upvote(e) {
+    var cardToUpdate = e.target.closest('.card').dataset.id;
+    var cardDataAttr = parseInt(cardToUpdate);
+    var ideaListIndex = findIndex(cardDataAttr);
+    var qualityList = storageArray[ideaListIndex].quality;
+  if (e.target.id === "upvote-btn" && qualityList <2) {
+    qualityList++ 
+  } else if (e.target.id === "downvote-btn" && qualityList > 0) {
+    qualityList--
+  }
+  storageArray[ideaListIndex].updateQuality(qualityList);
+  console.log('something', cardToUpdate);
+  updateQualityDisplay(cardToUpdate, qualityList);
+};
 
+function updateQualityDisplay(cardId, quality) {
+  document.querySelector(`.card[data-id="${cardId}"] .quality-text-card`).innerText = qualityList[quality];
+ };
+ //when we click upvote or downvote we are going to change the quality and we need to display that change in quality to the card
 
-
-
+ function findIndex(card) {
+  var cardId = card;
+  return storageArray.findIndex(function(item){
+    return item.id === cardId;
+  })
+};
  
 
 
